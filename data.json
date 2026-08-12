@@ -113,6 +113,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "alternative",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "대체가능한",
+              "example": "Do you have an alternative solution?   대안이 될 다른 해결책이 있나요?"
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
