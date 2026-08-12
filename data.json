@@ -124,6 +124,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "rarely",
+          "pos": "adv.",
+          "senses": [
+            {
+              "meaning": "드물게, 좀처럼 ~하지 않는",
+              "example": "We rarely agree on what to do.   우리는 할 일에 대해 합의를 보는 일이 드물다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
