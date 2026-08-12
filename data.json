@@ -91,6 +91,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "subtly",
+          "pos": "adv.",
+          "senses": [
+            {
+              "meaning": "미묘하게",
+              "example": "Her version of events is subtly different from what actually happened.   일어난 일들에 대한 그녀의 설명은 실제 있었던 것과 미묘하게 다르다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
