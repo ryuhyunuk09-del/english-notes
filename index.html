@@ -109,6 +109,17 @@ mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-h
 .pos{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);margin-left:8px;}
 .mean{margin-top:2px;color:var(--ink);}
 .ex{font-family:'Literata',Georgia,serif;font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:6px;padding-left:11px;border-left:2px solid rgba(14,124,107,.35);}
+.trans-block{
+  margin-top:24px;padding-top:18px;border-top:1px dashed var(--paper-edge);
+  font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:1.9;
+  color:#645c50;white-space:pre-wrap;
+}
+.trans-block .lead{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:#a2957f;display:block;margin-bottom:10px;
+}
+.btn-tr.on{background:var(--marker);border-color:var(--marker);color:#3d2c00;font-weight:500;}
+
 /* 뜻 목록 */
 .senses{margin-top:6px;display:flex;flex-direction:column;gap:8px;}
 .sense{display:flex;gap:9px;align-items:flex-start;padding:5px 8px;border-radius:7px;}
@@ -228,6 +239,7 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
         <div class="fld"><label>태그 (쉼표로 구분)</label><input class="in" id="fTags" placeholder="예) 모의고사, 사회"></div>
       </div>
       <div class="fld"><label>지문</label><textarea class="in" id="fBody" rows="12" placeholder="영어 지문을 붙여넣으세요"></textarea></div>
+      <div class="fld"><label>해석</label><textarea class="in" id="fTrans" rows="8" placeholder="지문 전체 해석을 적으세요"></textarea></div>
     </div>
     <div class="form-foot">
       <button class="btn" id="mCancel">취소</button>
@@ -275,7 +287,7 @@ let CFG = { owner:'', repo:'', branch:'main', path:'data.json', token:'' };
 let fileSha = null;
 let canEdit = false;
 let currentId = null, editingPassageId = null, editWordIdx = null, editGramIdx = null;
-let query = '', activeTag = null;
+let query = '', activeTag = null, showTrans = false;
 
 const $ = id => document.getElementById(id);
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
@@ -494,13 +506,18 @@ function renderMain(){
           <span>단어 ${(p.words||[]).length} · 문법 ${(p.grammars||[]).length}</span>
         </div>
       </div>
-      <div class="acts edit-only">
-        <button class="btn btn-sm" id="editP">지문 수정</button>
-        <button class="btn btn-sm btn-ghost" id="delP">삭제</button>
+      <div class="acts">
+        <button class="btn btn-sm btn-tr${showTrans?' on':''}" id="trBtn"${p.trans?'':' style="display:none;"'}>해석</button>
+        <span class="edit-only" style="display:contents;">
+          <button class="btn btn-sm" id="editP">지문 수정</button>
+          <button class="btn btn-sm btn-ghost" id="delP">삭제</button>
+        </span>
       </div>
     </div>
 
-    <div class="paper" id="paper">${renderPassageBody(p)}</div>
+    <div class="paper" id="paper">${renderPassageBody(p)}${
+      p.trans?`<div class="trans-block" id="transBlock"${showTrans?'':' style="display:none;"'}><span class="lead">해석</span>${esc(p.trans)}</div>`:''
+    }</div>
 
     <section class="sec">
       <div class="sec-head">
@@ -552,6 +569,12 @@ function renderMain(){
       </div>
       <div id="gramList"></div>
     </section>`;
+
+  if (p.trans) $('trBtn').onclick = ()=>{
+    showTrans = !showTrans;
+    $('transBlock').style.display = showTrans ? '' : 'none';
+    $('trBtn').classList.toggle('on', showTrans);
+  };
 
   if (canEdit){
     $('editP').onclick = ()=>openModal(p.id);
@@ -737,6 +760,7 @@ function openModal(id){
   $('modalTitle').textContent = p ? '지문 수정' : '지문 추가';
   $('fTitle').value = p?p.title:''; $('fSource').value = p?(p.source||''):'';
   $('fTags').value = p?(p.tags||[]).join(', '):''; $('fBody').value = p?p.body:'';
+  $('fTrans').value = p?(p.trans||''):'';
   $('veil').classList.add('open');
   setTimeout(()=>$('fTitle').focus(),60);
 }
@@ -747,11 +771,12 @@ $('mSave').onclick = ()=>{
   const title = $('fTitle').value.trim(), body = $('fBody').value.trim();
   if (!body){ toast('지문을 입력하세요'); $('fBody').focus(); return; }
   const tags = $('fTags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const trans = $('fTrans').value.trim();
   if (editingPassageId){
     const p = DB.passages.find(x=>x.id===editingPassageId);
-    Object.assign(p,{title:title||p.title, source:$('fSource').value.trim(), tags, body});
+    Object.assign(p,{title:title||p.title, source:$('fSource').value.trim(), tags, body, trans});
   }else{
-    const p = {id:uid(), title:title||'제목 없음', source:$('fSource').value.trim(), tags, body, words:[], grammars:[], createdAt:Date.now()};
+    const p = {id:uid(), title:title||'제목 없음', source:$('fSource').value.trim(), tags, body, trans, words:[], grammars:[], createdAt:Date.now()};
     DB.passages.unshift(p); currentId = p.id;
   }
   closeModal(); save(title?('지문 저장: '+title):'지문 저장'); renderSide(); renderMain();
