@@ -109,6 +109,25 @@ mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-h
 .pos{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);margin-left:8px;}
 .mean{margin-top:2px;color:var(--ink);}
 .ex{font-family:'Literata',Georgia,serif;font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:6px;padding-left:11px;border-left:2px solid rgba(14,124,107,.35);}
+/* 뜻 목록 */
+.senses{margin-top:6px;display:flex;flex-direction:column;gap:8px;}
+.sense{display:flex;gap:9px;align-items:flex-start;padding:5px 8px;border-radius:7px;}
+.sense.used{background:rgba(255,212,94,.20);box-shadow:inset 2px 0 0 var(--marker);}
+.sense .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);padding-top:3px;min-width:16px;}
+.sense.used .num{color:#8a6b00;font-weight:500;}
+.sense .txt{flex:1;min-width:0;}
+.used-tag{
+  font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;
+  background:var(--marker);color:#3d2c00;padding:2px 7px;border-radius:999px;
+  margin-left:8px;vertical-align:2px;white-space:nowrap;
+}
+
+/* 뜻 입력 줄 */
+.sense-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+.sense-row .pick{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink-soft);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
+.sense-row .s-m{flex:0 0 34%;}
+.sense-row .s-ex{flex:1;}
+
 .g-title{font-size:15px;font-weight:700;}
 .g-title .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;color:#fff;background:var(--teal);padding:2px 7px;border-radius:4px;margin-right:9px;vertical-align:2px;}
 .row-acts{display:flex;gap:2px;align-items:flex-start;}
@@ -423,7 +442,10 @@ function filtered(){
     if ((p.title||'').toLowerCase().includes(q)) return true;
     if ((p.body||'').toLowerCase().includes(q)) return true;
     if ((p.source||'').toLowerCase().includes(q)) return true;
-    if ((p.words||[]).some(w=>(w.term||'').toLowerCase().includes(q)||(w.meaning||'').toLowerCase().includes(q))) return true;
+    if ((p.words||[]).some(w=>
+      (w.term||'').toLowerCase().includes(q) ||
+      senses(w).some(s=>(s.meaning||'').toLowerCase().includes(q))
+    )) return true;
     if ((p.grammars||[]).some(g=>(g.title||'').toLowerCase().includes(q))) return true;
     return false;
   });
@@ -487,8 +509,8 @@ function renderMain(){
         <button class="btn btn-sm btn-fill edit-only" id="addWordBtn">+ 단어</button>
       </div>
       <div class="form" id="wordForm">
-        <div class="grid g3">
-          <div class="fld"><label>단어</label><input class="in" id="wTerm" placeholder="conformity"></div>
+        <div class="grid g2">
+          <div class="fld"><label>단어</label><input class="in" id="wTerm" placeholder="observe"></div>
           <div class="fld"><label>품사</label>
             <select class="in" id="wPos">
               <option value="n.">n. 명사</option><option value="v.">v. 동사</option>
@@ -497,10 +519,11 @@ function renderMain(){
               <option value="phr.">phr. 숙어</option><option value="">-</option>
             </select>
           </div>
-          <div class="fld"><label>뜻</label><input class="in" id="wMean" placeholder="순응, 동조"></div>
         </div>
-        <div class="grid g1" style="margin-top:10px;">
-          <div class="fld"><label>예문</label><input class="in" id="wEx" placeholder="Conformity is rewarded in most workplaces."></div>
+        <div class="fld" style="margin-top:12px;">
+          <label>뜻 · 예문 &nbsp;— &nbsp;왼쪽 동그라미로 지문에서 쓰인 뜻을 고르세요</label>
+          <div id="senseRows"></div>
+          <button class="btn btn-sm" id="addSense" style="align-self:flex-start;">+ 뜻 추가</button>
         </div>
         <div class="form-foot">
           <button class="btn btn-sm" id="wCancel">취소</button>
@@ -539,6 +562,13 @@ function renderMain(){
       save('지문 삭제'); renderSide(); renderMain();
     };
     $('addWordBtn').onclick = ()=>{ editWordIdx=null; resetWordForm(); $('wordForm').classList.toggle('open'); $('wTerm').focus(); };
+    $('addSense').onclick = ()=>{
+      const c = collectSenses();
+      c.list.push({meaning:'',example:''});
+      drawSenseRows(c.list, c.used);
+      const rows = $('senseRows').querySelectorAll('.s-m');
+      rows[rows.length-1].focus();
+    };
     $('wCancel').onclick = ()=>{ $('wordForm').classList.remove('open'); editWordIdx=null; };
     $('wSave').onclick = saveWord;
     $('addGramBtn').onclick = ()=>{ editGramIdx=null; resetGramForm(); $('gramForm').classList.toggle('open'); $('gTitle').focus(); };
@@ -562,18 +592,31 @@ function renderWords(){
     el.innerHTML = '<div class="empty">추가한 단어는 지문에서 형광펜으로 표시됩니다.</div>';
     return;
   }
-  el.innerHTML = p.words.map((w,i)=>`
+  el.innerHTML = p.words.map((w,i)=>{
+    const ss = senses(w);
+    const one = ss.length <= 1;
+    return `
     <div class="entry" data-word-row="${i}">
       <div class="body">
         <div><span class="term">${esc(w.term)}</span>${w.pos?`<span class="pos">${esc(w.pos)}</span>`:''}</div>
-        <div class="mean">${esc(w.meaning||'')}</div>
-        ${w.example?`<div class="ex">${esc(w.example)}</div>`:''}
+        <div class="senses">
+          ${ss.map((s,si)=>{
+            const on = (w.used|0) === si && !one;
+            return `<div class="sense${on?' used':''}">
+              ${one?'':`<span class="num">${si+1}</span>`}
+              <div class="txt">
+                <div class="mean">${esc(s.meaning||'')}${on?'<span class="used-tag">지문에서 쓰임</span>':''}</div>
+                ${s.example?`<div class="ex">${esc(s.example)}</div>`:''}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
       </div>
       <div class="row-acts edit-only">
         <button class="ico" data-wedit="${i}" title="수정">✎</button>
         <button class="ico del" data-wdel="${i}" title="삭제">✕</button>
       </div>
-    </div>`).join('');
+    </div>`;}).join('');
   if (!canEdit) return;
   el.querySelectorAll('[data-wdel]').forEach(b=>b.onclick=()=>{
     p.words.splice(+b.dataset.wdel,1); save('단어 삭제'); renderSide(); renderMain();
@@ -582,7 +625,7 @@ function renderWords(){
     const i = +b.dataset.wedit, w = p.words[i];
     editWordIdx = i;
     $('wTerm').value=w.term||''; $('wPos').value=w.pos||'';
-    $('wMean').value=w.meaning||''; $('wEx').value=w.example||'';
+    drawSenseRows(senses(w), w.used|0);
     $('wSave').textContent='수정 저장';
     $('wordForm').classList.add('open');
     $('wordForm').scrollIntoView({behavior:'smooth',block:'center'});
@@ -621,14 +664,56 @@ function renderGrams(){
   });
 }
 
-function resetWordForm(){ $('wTerm').value=''; $('wPos').value='n.'; $('wMean').value=''; $('wEx').value=''; $('wSave').textContent='추가'; }
+/* 예전 형식({meaning, example})도 그대로 읽히도록 맞춰 줍니다 */
+function senses(w){
+  if (Array.isArray(w.senses) && w.senses.length) return w.senses;
+  return [{meaning:w.meaning||'', example:w.example||''}];
+}
+
+function drawSenseRows(list, used){
+  const box = $('senseRows');
+  box.innerHTML = list.map((s,i)=>`
+    <div class="sense-row">
+      <label class="pick" title="지문에서 쓰인 뜻">
+        <input type="radio" name="usedSense" value="${i}"${used===i?' checked':''}>
+      </label>
+      <input class="in s-m" placeholder="뜻" value="${esc(s.meaning||'')}">
+      <input class="in s-ex" placeholder="예문" value="${esc(s.example||'')}">
+      <button class="ico del s-del" title="이 뜻 지우기">✕</button>
+    </div>`).join('');
+  box.querySelectorAll('.s-del').forEach((b,i)=>b.onclick=()=>{
+    const cur = collectSenses();
+    if (cur.list.length <= 1) { drawSenseRows([{meaning:'',example:''}], 0); return; }
+    cur.list.splice(i,1);
+    drawSenseRows(cur.list, Math.min(cur.used, cur.list.length-1));
+  });
+}
+function collectSenses(){
+  const rows = [...$('senseRows').querySelectorAll('.sense-row')];
+  const list = rows.map(r=>({
+    meaning: r.querySelector('.s-m').value.trim(),
+    example: r.querySelector('.s-ex').value.trim()
+  }));
+  let used = rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
+  if (used < 0) used = 0;
+  return {list, used};
+}
+
+function resetWordForm(){
+  $('wTerm').value=''; $('wPos').value='n.';
+  drawSenseRows([{meaning:'',example:''}], 0);
+  $('wSave').textContent='추가';
+}
 function resetGramForm(){ $('gTitle').value=''; $('gNote').value=''; $('gEx').value=''; $('gSave').textContent='추가'; }
 
 function saveWord(){
   const p = DB.passages.find(x=>x.id===currentId);
   const term = $('wTerm').value.trim();
   if (!term){ toast('단어를 입력하세요'); $('wTerm').focus(); return; }
-  const item = {term, pos:$('wPos').value, meaning:$('wMean').value.trim(), example:$('wEx').value.trim()};
+  const c = collectSenses();
+  const list = c.list.filter(s=>s.meaning || s.example);
+  if (!list.length){ toast('뜻을 하나 이상 입력하세요'); return; }
+  const item = {term, pos:$('wPos').value, senses:list, used:Math.min(c.used, list.length-1)};
   p.words = p.words||[];
   if (editWordIdx!==null) p.words[editWordIdx]=item; else p.words.push(item);
   editWordIdx = null;
