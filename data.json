@@ -4,15 +4,47 @@
       "id": "seed01",
       "title": "사회 규범과 개인의 선택",
       "source": "수업 자료",
-      "tags": ["사회", "문법확인"],
+      "tags": [
+        "사회"
+      ],
       "body": "In many societies, individual choices are shaped by social norms that people often accept without conscious reflection. These norms, which are passed down through schools, families, and the media, influence what individuals consider acceptable or desirable.\n\nAs a result, people may make decisions that appear personal but are deeply connected to the expectations of the groups to which they belong. This tendency becomes especially visible in situations where conformity is rewarded while deviation is subtly discouraged.\n\nIndividuals who might challenge prevailing norms may face social pressure that discourages open expression of alternative views. Such pressure, which is rarely imposed through formal rules, operates through everyday interactions that signal approval or disapproval.\n\nUnderstanding the social mechanisms that guide individual behavior allows people to recognize the limits of autonomy and to question assumptions that have long been taken for granted.",
       "words": [
-        { "term": "norm", "pos": "n.", "meaning": "규범, 기준", "example": "Social norms shape what we consider desirable." },
-        { "term": "conformity", "pos": "n.", "meaning": "순응, 동조", "example": "Conformity is rewarded while deviation is discouraged." },
-        { "term": "deviation", "pos": "n.", "meaning": "일탈, 벗어남", "example": "Any deviation from the group was quietly punished." },
-        { "term": "prevailing", "pos": "adj.", "meaning": "지배적인, 우세한", "example": "She refused to accept the prevailing view." },
-        { "term": "autonomy", "pos": "n.", "meaning": "자율성, 자주성", "example": "We should recognize the limits of autonomy." },
-        { "term": "take for granted", "pos": "phr.", "meaning": "당연하게 여기다", "example": "Assumptions that have long been taken for granted." }
+        {
+          "term": "norm",
+          "pos": "n.",
+          "meaning": "규범, 기준",
+          "example": "Social norms shape what we consider desirable."
+        },
+        {
+          "term": "conformity",
+          "pos": "n.",
+          "meaning": "순응, 동조",
+          "example": "Conformity is rewarded while deviation is discouraged."
+        },
+        {
+          "term": "deviation",
+          "pos": "n.",
+          "meaning": "일탈, 벗어남",
+          "example": "Any deviation from the group was quietly punished."
+        },
+        {
+          "term": "prevailing",
+          "pos": "adj.",
+          "meaning": "지배적인, 우세한",
+          "example": "She refused to accept the prevailing view."
+        },
+        {
+          "term": "autonomy",
+          "pos": "n.",
+          "meaning": "자율성, 자주성",
+          "example": "We should recognize the limits of autonomy."
+        },
+        {
+          "term": "take for granted",
+          "pos": "phr.",
+          "meaning": "당연하게 여기다",
+          "example": "Assumptions that have long been taken for granted."
+        }
       ],
       "grammars": [
         {
