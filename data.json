@@ -54,6 +54,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "desirable",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "바람직한",
+              "example": "It is desirable that interest rates should be reduced.   금리를 내리는 것이 바람직하다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
