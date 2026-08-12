@@ -24,6 +24,25 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "reflection",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "심사숙고",
+              "example": "She decided on reflection to accept his offer after all.   그녀는 심사숙고한 끝에 결국 그의 제의를 받아들이기로 결심했다."
+            },
+            {
+              "meaning": "(거울에비친) 상",
+              "example": "He admired his reflection in the mirror.   그는 거울 속에 비친 자기 모습에 감탄했다."
+            },
+            {
+              "meaning": "반영",
+              "example": "Your clothes are often a reflection of your personality.   사람이 입는 옷은 흔히 그 사람의 개성을 반영한다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
