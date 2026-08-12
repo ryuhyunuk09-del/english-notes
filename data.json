@@ -172,6 +172,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "autonomy",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "자율성",
+              "example": "giving individuals greater autonomy in their own lives   개인에게 자기 삶에 대한 더 큰 자율성을 부여하는"
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
