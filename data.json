@@ -4,33 +4,102 @@
       "id": "seed01",
       "title": "사회 규범과 개인의 선택",
       "source": "수업 자료",
-      "tags": ["사회", "문법확인"],
+      "tags": [
+        "사회",
+        "심리"
+      ],
       "body": "In many societies, individual choices are shaped by social norms that people often accept without conscious reflection. These norms, which are passed down through schools, families, and the media, influence what individuals consider acceptable or desirable.\n\nAs a result, people may make decisions that appear personal but are deeply connected to the expectations of the groups to which they belong. This tendency becomes especially visible in situations where conformity is rewarded while deviation is subtly discouraged.\n\nIndividuals who might challenge prevailing norms may face social pressure that discourages open expression of alternative views. Such pressure, which is rarely imposed through formal rules, operates through everyday interactions that signal approval or disapproval.\n\nUnderstanding the social mechanisms that guide individual behavior allows people to recognize the limits of autonomy and to question assumptions that have long been taken for granted.",
       "words": [
-        { "term": "norm", "pos": "n.", "used": 0, "senses": [
-          { "meaning": "규범, 관습", "example": "Social norms shape what we consider desirable." },
-          { "meaning": "표준, 기준치", "example": "Scores above the norm are rare." }
-        ]},
-        { "term": "conformity", "pos": "n.", "used": 0, "senses": [
-          { "meaning": "순응, 동조", "example": "Conformity is rewarded while deviation is discouraged." },
-          { "meaning": "(규정과의) 일치, 부합", "example": "The building is in conformity with safety codes." }
-        ]},
-        { "term": "deviation", "pos": "n.", "used": 0, "senses": [
-          { "meaning": "일탈, 벗어남", "example": "Any deviation from the group was quietly punished." },
-          { "meaning": "(통계) 편차", "example": "The standard deviation was unusually small." }
-        ]},
-        { "term": "prevailing", "pos": "adj.", "used": 0, "senses": [
-          { "meaning": "지배적인, 우세한", "example": "She refused to accept the prevailing view." },
-          { "meaning": "(바람이) 탁월풍의", "example": "The prevailing wind blows from the west." }
-        ]},
-        { "term": "autonomy", "pos": "n.", "used": 0, "senses": [
-          { "meaning": "자율성, 자기 결정권", "example": "We should recognize the limits of autonomy." },
-          { "meaning": "(지역의) 자치권", "example": "The region was granted partial autonomy." }
-        ]},
-        { "term": "take for granted", "pos": "phr.", "used": 0, "senses": [
-          { "meaning": "당연하게 여기다", "example": "Assumptions that have long been taken for granted." },
-          { "meaning": "(사람을) 소홀히 대하다", "example": "He felt taken for granted by his colleagues." }
-        ]}
+        {
+          "term": "norm",
+          "pos": "n.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "규범, 관습",
+              "example": "Social norms shape what we consider desirable."
+            },
+            {
+              "meaning": "표준, 기준치",
+              "example": "Scores above the norm are rare."
+            }
+          ]
+        },
+        {
+          "term": "conformity",
+          "pos": "n.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "순응, 동조",
+              "example": "Conformity is rewarded while deviation is discouraged."
+            },
+            {
+              "meaning": "(규정과의) 일치, 부합",
+              "example": "The building is in conformity with safety codes."
+            }
+          ]
+        },
+        {
+          "term": "deviation",
+          "pos": "n.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "일탈, 벗어남",
+              "example": "Any deviation from the group was quietly punished."
+            },
+            {
+              "meaning": "(통계) 편차",
+              "example": "The standard deviation was unusually small."
+            }
+          ]
+        },
+        {
+          "term": "prevailing",
+          "pos": "adj.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "지배적인, 우세한",
+              "example": "She refused to accept the prevailing view."
+            },
+            {
+              "meaning": "(바람이) 탁월풍의",
+              "example": "The prevailing wind blows from the west."
+            }
+          ]
+        },
+        {
+          "term": "autonomy",
+          "pos": "n.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "자율성, 자기 결정권",
+              "example": "We should recognize the limits of autonomy."
+            },
+            {
+              "meaning": "(지역의) 자치권",
+              "example": "The region was granted partial autonomy."
+            }
+          ]
+        },
+        {
+          "term": "take for granted",
+          "pos": "phr.",
+          "used": 0,
+          "senses": [
+            {
+              "meaning": "당연하게 여기다",
+              "example": "Assumptions that have long been taken for granted."
+            },
+            {
+              "meaning": "(사람을) 소홀히 대하다",
+              "example": "He felt taken for granted by his colleagues."
+            }
+          ]
+        }
       ],
       "grammars": [
         {
@@ -49,7 +118,8 @@
           "example": "the groups to which they belong"
         }
       ],
-      "createdAt": 1
+      "createdAt": 1,
+      "trans": "많은 사회에서 개인의 선택은 사람들이 깊이 생각해 보지 않고 그냥 받아들이는 사회적 규범에 의해 만들어진다. 학교와 가정, 미디어를 통해 전해지는 이 규범들은 사람들이 무엇을 괜찮다고 여기고 무엇을 바람직하다고 여기는지에 영향을 준다.\n그래서 사람들은 겉보기에는 자기 혼자 내린 것 같지만 사실은 자신이 속한 집단이 바라는 바와 깊이 연결된 결정을 내리게 된다. 이런 모습은 남들을 따르면 이득을 보고 다르게 행동하면 은근히 눈치를 주는 상황에서 특히 잘 드러난다.\n널리 퍼진 규범에 문제를 제기할 만한 사람들도, 다른 생각을 드러내 놓고 말하기 어렵게 만드는 사회적 압박을 받을 수 있다. 이런 압박은 정해진 규칙으로 주어지는 경우는 드물고, 잘했다거나 못마땅하다는 신호를 주고받는 일상적인 대화 속에서 작동한다.\n사람의 행동을 이끄는 이런 사회적 원리를 이해하면, 우리는 스스로 결정한다고 믿는 것에도 한계가 있음을 알게 되고 오랫동안 당연하게 여겨 온 생각들에 의문을 던질 수 있게 된다."
     }
   ]
 }
