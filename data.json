@@ -65,6 +65,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "tendency",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "경향,성향",
+              "example": "I have a tendency to talk too much when I’m nervous.   나는 초조하면 말을 너무 많이 하는 성향이 있다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
