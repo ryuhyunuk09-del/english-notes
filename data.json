@@ -150,6 +150,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "operate",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "작동되다",
+              "example": "Some people can only operate well under pressure.   일부 사람들은 압박을 받아야만 잘 움직인다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
