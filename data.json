@@ -161,6 +161,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "approval",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "인정",
+              "example": "She desperately wanted to win her father’s approval.   그녀는 아버지로부터 인정을 받기를 간절히 원했다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
