@@ -76,6 +76,21 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "deviation",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "일탈",
+              "example": "deviation from the previously accepted norms   이전에 받아들여지던 규범으로부터의 일탈"
+            },
+            {
+              "meaning": "편차",
+              "example": "a compass deviation of 5°   편차가 5°인 나침반"
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
