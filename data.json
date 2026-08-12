@@ -14,36 +14,6 @@
           "pos": "n.",
           "meaning": "규범, 기준",
           "example": "Social norms shape what we consider desirable."
-        },
-        {
-          "term": "conformity",
-          "pos": "n.",
-          "meaning": "순응, 동조",
-          "example": "Conformity is rewarded while deviation is discouraged."
-        },
-        {
-          "term": "deviation",
-          "pos": "n.",
-          "meaning": "일탈, 벗어남",
-          "example": "Any deviation from the group was quietly punished."
-        },
-        {
-          "term": "prevailing",
-          "pos": "adj.",
-          "meaning": "지배적인, 우세한",
-          "example": "She refused to accept the prevailing view."
-        },
-        {
-          "term": "autonomy",
-          "pos": "n.",
-          "meaning": "자율성, 자주성",
-          "example": "We should recognize the limits of autonomy."
-        },
-        {
-          "term": "take for granted",
-          "pos": "phr.",
-          "meaning": "당연하게 여기다",
-          "example": "Assumptions that have long been taken for granted."
         }
       ],
       "grammars": [
