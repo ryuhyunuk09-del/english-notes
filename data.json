@@ -198,11 +198,6 @@
       ],
       "grammars": [
         {
-          "title": "계속적 용법의 관계대명사 (, which)",
-          "note": "콤마 + which는 앞의 명사를 부연 설명합니다. that으로 바꿔 쓸 수 없습니다.",
-          "example": "These norms, which are passed down through schools, ..."
-        },
-        {
           "title": "전치사 + 관계대명사",
           "note": "to which they belong = which they belong to. 격식 있는 문어체에서 전치사를 앞으로 보냅니다.",
           "example": "the groups to which they belong"
