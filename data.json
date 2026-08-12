@@ -135,6 +135,21 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "impose",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "(의견등을) 강요하다",
+              "example": "She didn’t want to impose her values on her family.   그녀는 자신의 가치관을 가족에게 강요하고 싶지 않았다."
+            },
+            {
+              "meaning": "(새로운 법률·세금 등을) 도입하다",
+              "example": "A new tax was imposed on fuel.   유류에 새로운 세금이 도입되었다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
