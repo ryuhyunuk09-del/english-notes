@@ -1,0 +1,37 @@
+{
+  "passages": [
+    {
+      "id": "seed01",
+      "title": "사회 규범과 개인의 선택",
+      "source": "수업 자료",
+      "tags": ["사회", "문법확인"],
+      "body": "In many societies, individual choices are shaped by social norms that people often accept without conscious reflection. These norms, which are passed down through schools, families, and the media, influence what individuals consider acceptable or desirable.\n\nAs a result, people may make decisions that appear personal but are deeply connected to the expectations of the groups to which they belong. This tendency becomes especially visible in situations where conformity is rewarded while deviation is subtly discouraged.\n\nIndividuals who might challenge prevailing norms may face social pressure that discourages open expression of alternative views. Such pressure, which is rarely imposed through formal rules, operates through everyday interactions that signal approval or disapproval.\n\nUnderstanding the social mechanisms that guide individual behavior allows people to recognize the limits of autonomy and to question assumptions that have long been taken for granted.",
+      "words": [
+        { "term": "norm", "pos": "n.", "meaning": "규범, 기준", "example": "Social norms shape what we consider desirable." },
+        { "term": "conformity", "pos": "n.", "meaning": "순응, 동조", "example": "Conformity is rewarded while deviation is discouraged." },
+        { "term": "deviation", "pos": "n.", "meaning": "일탈, 벗어남", "example": "Any deviation from the group was quietly punished." },
+        { "term": "prevailing", "pos": "adj.", "meaning": "지배적인, 우세한", "example": "She refused to accept the prevailing view." },
+        { "term": "autonomy", "pos": "n.", "meaning": "자율성, 자주성", "example": "We should recognize the limits of autonomy." },
+        { "term": "take for granted", "pos": "phr.", "meaning": "당연하게 여기다", "example": "Assumptions that have long been taken for granted." }
+      ],
+      "grammars": [
+        {
+          "title": "현재완료의 계속적 용법 (have p.p.)",
+          "note": "주절 동사가 현재(allows)이므로, 과거부터 지금까지 이어지는 상태는 현재완료로 씁니다. 과거완료(had p.p.)는 기준이 되는 과거 시점이 문장에 있어야 성립합니다.",
+          "example": "assumptions that have long been taken for granted"
+        },
+        {
+          "title": "계속적 용법의 관계대명사 (, which)",
+          "note": "콤마 + which는 앞의 명사를 부연 설명합니다. that으로 바꿔 쓸 수 없습니다.",
+          "example": "These norms, which are passed down through schools, ..."
+        },
+        {
+          "title": "전치사 + 관계대명사",
+          "note": "to which they belong = which they belong to. 격식 있는 문어체에서 전치사를 앞으로 보냅니다.",
+          "example": "the groups to which they belong"
+        }
+      ],
+      "createdAt": 1
+    }
+  ]
+}
