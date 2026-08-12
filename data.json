@@ -183,6 +183,17 @@
             }
           ],
           "used": 0
+        },
+        {
+          "term": "take A for B",
+          "pos": "phr.",
+          "senses": [
+            {
+              "meaning": "A를 B로 여기다",
+              "example": "We took it for granted that he was the ringleader.   우리는 당연히 그가 주모자라고 생각했다."
+            }
+          ],
+          "used": 0
         }
       ],
       "grammars": [
