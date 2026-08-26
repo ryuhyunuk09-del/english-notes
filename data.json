@@ -1,7 +1,7 @@
 {
   "passages": [
     {
-      "id": "mta2g5tzspz8t",
+      "id": "mta2ini4147y7",
       "title": "미기후를 만든 정원",
       "source": "수업자료",
       "tags": [
@@ -30,13 +30,13 @@
         },
         {
           "text": "made a warmer microclimate using strategic gardening methods",
-          "trans": "전략적인 원예 방법을 써서 더 따뜻한 미기후를 만들었다"
+          "trans": "다른 사람들이 혹독한 날씨를 이겨내도록 도왔다"
         }
       ],
       "answer": 4,
       "words": [],
       "grammars": [],
-      "createdAt": 1787747072904
+      "createdAt": 1787747189117
     },
     {
       "id": "seed01",
