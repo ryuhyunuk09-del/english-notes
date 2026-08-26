@@ -1,6 +1,44 @@
 {
   "passages": [
     {
+      "id": "mta2g5tzspz8t",
+      "title": "미기후를 만든 정원",
+      "source": "수업자료",
+      "tags": [
+        "과학",
+        "함축의미"
+      ],
+      "body": "Even outdoors, although climate (including temperature) is usually regarded as beyond the control of man, localized temperature control is sometimes effective on a microclimate scale. Vancouver, Canada, is a few miles north of the 49th parallel, about 60 miles farther north than Minot, North Dakota, with its legendary harsh winter temperatures. But constant foehn winds off the Pacific Ocean make Vancouver winters mild and wet, although sunshine is scant. When I had a garden there in the late 1940s, a neighbor used to say that I \"cheated God\" to bring in my lettuce and tomatoes earlier than anyone else. The bed in which the vegetables grew was banked toward the south at approximately 50 degrees, and the area between the plants was covered with flat stones, gathered from the nearby beach, to maximize soil heating from the weak late winter–early spring sun.",
+      "trans": "야외에서도, 기후(온도를 포함해)는 보통 인간이 통제할 수 없는 것으로 여겨지지만, 국지적인 온도 조절은 미기후 규모에서는 때때로 효과가 있다. 캐나다 밴쿠버는 북위 49도선에서 몇 마일 북쪽에 있는데, 혹독한 겨울 기온으로 유명한 노스다코타주 마이놋보다 약 60마일 더 북쪽이다. 그러나 태평양에서 불어오는 끊임없는 푄 바람이 밴쿠버의 겨울을 온화하고 습하게 만든다. 다만 햇빛은 부족하다. 1940년대 후반에 내가 그곳에서 정원을 가꿀 때, 한 이웃은 내가 남들보다 상추와 토마토를 일찍 수확한다며 내가 \"신을 속였다\"고 말하곤 했다. 채소가 자라던 화단은 남쪽을 향해 약 50도로 경사지게 쌓아 올렸고, 식물 사이의 공간은 근처 해변에서 주워 온 납작한 돌로 덮어, 늦겨울에서 초봄까지의 약한 햇빛으로부터 흙이 데워지는 것을 최대로 끌어올렸다.",
+      "question": "cheated God이 다음 글에서 의미하는 바로 가장 적절한 것은?",
+      "choices": [
+        {
+          "text": "prayed to get more vegetables than anyone else",
+          "trans": "남들보다 채소를 더 많이 얻게 해달라고 기도했다"
+        },
+        {
+          "text": "produced many more crops in spite of strong winds",
+          "trans": "강한 바람에도 불구하고 훨씬 많은 작물을 생산했다"
+        },
+        {
+          "text": "confronted the severe climate with the latest technology",
+          "trans": "최신 기술로 혹독한 기후에 맞섰다"
+        },
+        {
+          "text": "helped others to overcome the harsh weather conditions",
+          "trans": "다른 사람들이 혹독한 날씨를 이겨내도록 도왔다"
+        },
+        {
+          "text": "made a warmer microclimate using strategic gardening methods",
+          "trans": "전략적인 원예 방법을 써서 더 따뜻한 미기후를 만들었다"
+        }
+      ],
+      "answer": null,
+      "words": [],
+      "grammars": [],
+      "createdAt": 1787747072904
+    },
+    {
       "id": "seed01",
       "title": "사회 규범과 개인의 선택",
       "source": "수업 자료",
