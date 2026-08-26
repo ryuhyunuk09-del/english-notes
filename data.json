@@ -1,7 +1,45 @@
 {
   "passages": [
     {
-      "id": "mta2ini4147y7",
+      "id": "mta2lx8q16qmy",
+      "title": "DNA라는 역사의 운반체",
+      "source": "수업자료",
+      "tags": [
+        "과학",
+        "함축의미"
+      ],
+      "body": "In the early 1960s the great American writer James Baldwin wrote: \"People are trapped in history, and history is trapped in them.\" He was speaking to race when he penned those words. But the statement is equally true if the word \"people\" is replaced with \"all of life on Earth, present and past,\" for each strand of DNA, in each of our cells, is an ancient record of biological history, written in simple code and passed down from generation to generation. One could say that DNA is nothing but history, one with a physical manifestation that was slowly blended and accumulated over countless eons by the most pitiless of all phenomena — natural selection. DNA is a history that is inside us — and yet one that is our master as well, the blueprint for our bodies, and dictator of what we will pass on to our children, gifts that can be blessings — or deadly time bombs. We are indeed trapped in this particular vehicle of history as much as it is trapped in us.",
+      "trans": "1960년대 초 위대한 미국 작가 제임스 볼드윈은 이렇게 썼다. \"사람들은 역사에 갇혀 있고, 역사는 그들 안에 갇혀 있다.\" 그가 그 글을 썼을 때 그는 인종에 관해 말하고 있었다. 그러나 \"사람들\"이라는 단어를 \"현재와 과거의 지구상 모든 생명\"으로 바꾸어도 그 진술은 똑같이 참이다. 우리 세포 하나하나에 들어 있는 DNA의 각 가닥은 단순한 코드로 쓰여 세대에서 세대로 전해져 내려온 오래된 생물학적 역사의 기록이기 때문이다. DNA는 역사 그 자체일 뿐이며, 모든 현상 중 가장 냉혹한 것 — 자연선택 — 에 의해 억겁의 세월에 걸쳐 서서히 섞이고 축적되어 물리적 형태를 갖추게 된 역사라고 말할 수 있을 것이다. DNA는 우리 안에 있는 역사이면서, 동시에 우리의 주인이기도 하다. 우리 몸의 설계도이자, 우리가 자녀에게 무엇을 물려줄지를 결정하는 지배자다. 그 선물은 축복일 수도, 치명적인 시한폭탄일 수도 있다. 우리는 실로 이 특별한 역사의 운반체에 갇혀 있으며, 그것 역시 우리 안에 갇혀 있다.",
+      "question": "We are indeed trapped in this particular vehicle of history가 다음 글에서 의미하는 바로 가장 적절한 것은?",
+      "choices": [
+        {
+          "text": "We evolve beyond biology by developing history, language, and tools.",
+          "trans": "우리는 역사, 언어, 도구를 발전시킴으로써 생물학을 넘어 진화한다"
+        },
+        {
+          "text": "History is repeated within the genetic and social constraints we pass down.",
+          "trans": "역사는 우리가 물려주는 유전적·사회적 제약 안에서 반복된다"
+        },
+        {
+          "text": "We are born and raised as social beings with a sense of interdependence.",
+          "trans": "우리는 상호의존 감각을 지닌 사회적 존재로 태어나고 길러진다"
+        },
+        {
+          "text": "We are shaped by DNA, which influences our traits, destiny and descendants.",
+          "trans": "우리는 DNA에 의해 형성되며, DNA는 우리의 특성과 운명, 후손에 영향을 미친다"
+        },
+        {
+          "text": "Through natural selection, species are locked in the endless cycle of adaptation.",
+          "trans": "자연선택을 통해 종들은 끝없는 적응의 순환에 갇혀 있다"
+        }
+      ],
+      "answer": null,
+      "words": [],
+      "grammars": [],
+      "createdAt": 1787747341706
+    },
+    {
+      "id": "mta2g5tzspz8t",
       "title": "미기후를 만든 정원",
       "source": "수업자료",
       "tags": [
@@ -30,13 +68,13 @@
         },
         {
           "text": "made a warmer microclimate using strategic gardening methods",
-          "trans": "다른 사람들이 혹독한 날씨를 이겨내도록 도왔다"
+          "trans": "전략적인 원예 방법을 써서 더 따뜻한 미기후를 만들었다"
         }
       ],
       "answer": 4,
       "words": [],
       "grammars": [],
-      "createdAt": 1787747189117
+      "createdAt": 1787747072904
     },
     {
       "id": "seed01",
