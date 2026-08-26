@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문법 노트</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1f7; --surface:#ffffff; --paper:#fffdf8; --paper-edge:#ece4d3;
+  --ink:#151b28; --ink-soft:#5a6478; --ink-faint:#8d96a8; --line:#dee3ed;
+  --marker:#ffd45e; --teal:#0e7c6b; --rose:#c0453f; --r:10px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
+button{cursor:pointer;}
+body:not(.can-edit) .edit-only{display:none!important;}
+
+.page{max-width:840px;margin:0 auto;padding:32px 28px 90px;}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px;}
+h1{margin:0;font-family:'Literata',Georgia,serif;font-size:26px;font-weight:600;letter-spacing:-.015em;}
+.sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:5px;}
+.nav{display:flex;gap:6px;margin-top:12px;}
+.nav a{font-size:12.5px;text-decoration:none;padding:6px 12px;border-radius:7px;border:1px solid var(--line);color:var(--ink-soft);background:#fff;}
+.nav a.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500;}
+.nav a:hover:not(.on){background:#f2f5fa;color:var(--ink);}
+
+.btn{padding:9px 15px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:13px;}
+.btn:hover{background:#f2f5fa;}
+.btn-fill{background:var(--marker);border-color:var(--marker);color:#3d2c00;font-weight:500;}
+.btn-fill:hover{background:#ffc42a;}
+.btn-sm{padding:6px 11px;font-size:12px;border-radius:7px;}
+.btn-ghost{background:transparent;border-color:transparent;color:var(--ink-soft);}
+.btn-key.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.acts{display:flex;gap:7px;flex-wrap:wrap;}
+
+.search{width:100%;padding:10px 13px;border-radius:9px;background:#fff;border:1px solid var(--line);outline:none;margin-bottom:20px;}
+.search:focus{border-color:var(--marker);}
+.search::placeholder{color:var(--ink-faint);}
+
+.group{margin-bottom:30px;}
+.ghead{display:flex;align-items:center;gap:10px;padding-bottom:9px;margin-bottom:12px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+.ghead .src{font-family:'Literata',Georgia,serif;font-size:17px;font-weight:600;}
+.ghead .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);}
+.ghead .sp{flex:1;}
+.ghead a{font-size:12px;color:var(--teal);text-decoration:none;}
+.ghead a:hover{text-decoration:underline;}
+
+.item{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-bottom:9px;display:flex;gap:14px;}
+.item .body{flex:1;min-width:0;}
+.g-title{font-size:15.5px;font-weight:700;}
+.g-title .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;color:#fff;background:var(--teal);padding:2px 7px;border-radius:4px;margin-right:9px;vertical-align:2px;}
+.note{margin-top:7px;color:var(--ink-soft);white-space:pre-wrap;}
+.ex{font-family:'Literata',Georgia,serif;font-style:italic;color:var(--ink);font-size:14.5px;margin-top:9px;padding-left:11px;border-left:2px solid rgba(255,196,20,.6);}
+.row-acts{display:flex;gap:2px;align-items:flex-start;}
+.ico{background:transparent;border:0;color:var(--ink-faint);padding:4px 7px;border-radius:6px;font-size:13px;line-height:1;}
+.ico:hover{background:#f0f3f8;color:var(--ink);}
+.ico.del:hover{color:var(--rose);}
+
+.form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:20px;display:none;}
+.form.open{display:block;}
+.grid{display:grid;gap:10px;}
+.fld{display:flex;flex-direction:column;gap:5px;}
+.fld label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);}
+.in{width:100%;padding:9px 11px;border-radius:8px;background:#f7f9fc;border:1px solid var(--line);outline:none;}
+.in:focus{border-color:var(--marker);background:#fff;}
+.in::placeholder{color:#a8b0c0;}
+textarea.in{resize:vertical;min-height:80px;line-height:1.7;}
+.form-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;}
+
+.empty{border:1px dashed var(--line);border-radius:var(--r);padding:30px;text-align:center;color:var(--ink-faint);font-size:14px;background:#fff;}
+.veil{display:none;position:fixed;inset:0;background:rgba(21,27,40,.45);z-index:50;padding:28px;overflow-y:auto;}
+.veil.open{display:block;}
+.modal{max-width:640px;margin:24px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 24px 60px rgba(21,27,40,.22);}
+.modal h3{margin:0 0 6px;font-family:'Literata',Georgia,serif;font-size:20px;font-weight:600;}
+.modal .hint{color:var(--ink-soft);font-size:13px;margin:0 0 18px;line-height:1.65;}
+.modal .hint code{background:#f0f3f8;padding:1px 5px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+.g2{grid-template-columns:1fr 1fr;}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:var(--ink);color:#fff;font-size:13px;padding:10px 20px;border-radius:999px;opacity:0;transition:.28s ease;z-index:80;pointer-events:none;max-width:88vw;text-align:center;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.status{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-bottom:16px;}
+.status b{color:var(--teal);font-weight:500;}
+
+@media (max-width:700px){
+  .page{padding:22px 16px 70px;}
+  h1{font-size:22px;}
+  .g2{grid-template-columns:1fr;}
+  .veil{padding:0;}
+  .modal{margin:0;border-radius:0;min-height:100vh;}
+}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="top">
+    <div>
+      <h1>문법 노트</h1>
+      <div class="sub">Grammar</div>
+      <div class="nav">
+        <a href="./">지문</a>
+        <a href="./grammar.html" class="on">문법</a>
+      </div>
+    </div>
+    <div class="acts">
+      <button class="btn btn-sm btn-fill edit-only" id="addBtn">+ 문법 추가</button>
+      <button class="btn btn-sm btn-key" id="keyBtn">🔒 편집</button>
+    </div>
+  </div>
+
+  <div class="status" id="status"></div>
+  <input class="search" id="search" placeholder="문법 · 설명 · 예문 검색">
+
+  <div class="form" id="form">
+    <div class="grid">
+      <div class="fld"><label>문법 포인트</label><input class="in" id="gTitle" placeholder="현재완료의 계속적 용법"></div>
+      <div class="fld"><label>설명</label><textarea class="in" id="gNote" rows="3" placeholder="과거부터 현재까지 이어지는 상태 → have p.p."></textarea></div>
+      <div class="fld"><label>예문</label><input class="in" id="gEx" placeholder="assumptions that have long been taken for granted"></div>
+      <div class="fld"><label>연결할 지문</label><select class="in" id="gPass"></select></div>
+    </div>
+    <div class="form-foot">
+      <button class="btn btn-sm" id="gCancel">취소</button>
+      <button class="btn btn-sm btn-fill" id="gSave">추가</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<!-- 편집 권한 모달 -->
+<div class="veil" id="keyVeil">
+  <div class="modal">
+    <h3>편집 권한 열기</h3>
+    <p class="hint">GitHub 토큰을 넣으면 편집 모드가 열리고, 수정한 내용이 저장소의 <code>data.json</code>에 바로 커밋됩니다. 토큰은 이 브라우저에만 남습니다.</p>
+    <div class="grid">
+      <div class="grid g2">
+        <div class="fld"><label>GitHub 아이디</label><input class="in" id="kOwner" placeholder="your-id"></div>
+        <div class="fld"><label>저장소 이름</label><input class="in" id="kRepo" placeholder="english-notes"></div>
+      </div>
+      <div class="grid g2">
+        <div class="fld"><label>브랜치</label><input class="in" id="kBranch" placeholder="main"></div>
+        <div class="fld"><label>저장소 내 경로</label><input class="in" id="kPath" placeholder="data.json"></div>
+      </div>
+      <div class="fld"><label>Access token</label><input class="in" id="kToken" type="password" placeholder="github_pat_..."></div>
+      <label style="display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-soft);">
+        <input type="checkbox" id="kRemember" checked> 이 브라우저에 기억하기
+      </label>
+    </div>
+    <div class="form-foot">
+      <button class="btn btn-ghost" id="kForget" style="margin-right:auto;">권한 끄기</button>
+      <button class="btn" id="kCancel">취소</button>
+      <button class="btn btn-fill" id="kSave">확인</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* 지문 페이지와 같은 data.json 을 씁니다. 설정·토큰도 같은 것을 공유합니다. */
+let DB={passages:[]};
+let CFG={owner:'',repo:'',branch:'main',path:'data.json',token:''};
+let fileSha=null, canEdit=false, query='';
+let editKey=null;   // {pid, idx} — pid가 '' 이면 지문에 연결되지 않은 문법
+
+const $ = id=>document.getElementById(id);
+const esc = s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function readCfg(){ try{ const r=window.localStorage.getItem('en-notes-cfg'); if(r) Object.assign(CFG,JSON.parse(r)); }catch(e){} }
+function writeCfg(v){ try{ v?window.localStorage.setItem('en-notes-cfg',JSON.stringify(CFG)):window.localStorage.removeItem('en-notes-cfg'); }catch(e){} }
+
+function b64encode(str){
+  const b=new TextEncoder().encode(str); let s='';
+  for(let i=0;i<b.length;i+=0x8000) s+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));
+  return btoa(s);
+}
+let tt=null;
+function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2400); }
+
+async function loadData(){
+  try{
+    const r=await fetch('./data.json?v='+Date.now(),{cache:'no-store'});
+    if(r.ok){ const d=await r.json(); if(d&&Array.isArray(d.passages)){ DB=d; return true; } }
+  }catch(e){}
+  return false;
+}
+function ghHeaders(){ return {'Authorization':'Bearer '+CFG.token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}; }
+function api(){ return `https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}`+(CFG.branch?`?ref=${encodeURIComponent(CFG.branch)}`:''); }
+async function fetchSha(){
+  if(!CFG.token||!CFG.owner||!CFG.repo) return null;
+  try{
+    const r=await fetch(api(),{headers:ghHeaders()});
+    if(r.status===404){ fileSha=null; return null; }
+    if(!r.ok) throw new Error(r.status);
+    const j=await r.json(); fileSha=j.sha; return j.sha;
+  }catch(e){ return null; }
+}
+let st=null, saving=false;
+function save(msg){ if(!canEdit) return; setStatus('저장 대기…'); clearTimeout(st); st=setTimeout(()=>commit(msg),900); }
+async function commit(msg){
+  if(saving){ save(msg); return; }
+  saving=true; setStatus('저장 중…');
+  try{
+    if(fileSha===null) await fetchSha();
+    const url=`https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}`;
+    const body={message:msg||'문법 노트 업데이트',content:b64encode(JSON.stringify(DB,null,2)),branch:CFG.branch||'main'};
+    if(fileSha) body.sha=fileSha;
+    let r=await fetch(url,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(r.status===409||r.status===422){
+      await fetchSha(); if(fileSha) body.sha=fileSha;
+      r=await fetch(url,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+    }
+    if(!r.ok){ const t=await r.text(); throw new Error(r.status+' '+t.slice(0,120)); }
+    const j=await r.json(); fileSha=j.content&&j.content.sha;
+    setStatus('저장됨 · '+new Date().toLocaleTimeString('ko-KR'));
+  }catch(e){ setStatus('저장 실패'); toast('저장 실패 — 토큰 설정을 확인하세요 ('+e.message+')'); }
+  finally{ saving=false; }
+}
+function setStatus(s){
+  $('status').innerHTML = canEdit
+    ? `<b>편집 모드</b> · ${esc(CFG.owner)}/${esc(CFG.repo)} · ${esc(s)}`
+    : '읽기 모드 · 편집하려면 🔒 를 누르세요';
+}
+
+/* ================= 목록 ================= */
+function groups(){
+  const q=query.trim().toLowerCase();
+  const hit=g=>!q || (g.title||'').toLowerCase().includes(q)
+                 || (g.note||'').toLowerCase().includes(q)
+                 || (g.example||'').toLowerCase().includes(q);
+  const out=[];
+  const gen=(DB.grammars||[]).map((g,i)=>({g,i})).filter(o=>hit(o.g));
+  if (gen.length) out.push({pid:'', name:'지문과 무관한 정리', items:gen});
+  DB.passages.forEach(p=>{
+    const items=(p.grammars||[]).map((g,i)=>({g,i})).filter(o=>hit(o.g));
+    if (items.length) out.push({pid:p.id, name:p.title||'제목 없음', items});
+  });
+  return out;
+}
+function render(){
+  const gs=groups(), el=$('list');
+  const total=gs.reduce((n,g)=>n+g.items.length,0);
+  if (!total){
+    el.innerHTML=`<div class="empty">${query?'조건에 맞는 문법이 없습니다.':'아직 정리한 문법이 없습니다.'}</div>`;
+    return;
+  }
+  el.innerHTML = gs.map(gr=>`
+    <div class="group">
+      <div class="ghead">
+        <span class="src">${esc(gr.name)}</span>
+        <span class="n">${gr.items.length}</span>
+        <span class="sp"></span>
+        ${gr.pid?`<a href="./#${gr.pid}">지문 보기 →</a>`:''}
+      </div>
+      ${gr.items.map(o=>`
+        <div class="item">
+          <div class="body">
+            <div class="g-title"><span class="badge">${String(o.i+1).padStart(2,'0')}</span>${esc(o.g.title)}</div>
+            ${o.g.note?`<div class="note">${esc(o.g.note)}</div>`:''}
+            ${o.g.example?`<div class="ex">${esc(o.g.example)}</div>`:''}
+          </div>
+          <div class="row-acts edit-only">
+            <button class="ico" data-e="${gr.pid}|${o.i}" title="수정">✎</button>
+            <button class="ico del" data-d="${gr.pid}|${o.i}" title="삭제">✕</button>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+
+  if (!canEdit) return;
+  el.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{
+    const [pid,i]=b.dataset.d.split('|');
+    if (!confirm('이 문법 항목을 삭제할까요?')) return;
+    arrOf(pid).splice(+i,1);
+    save('문법 삭제'); render();
+  });
+  el.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{
+    const [pid,i]=b.dataset.e.split('|');
+    const g=arrOf(pid)[+i];
+    editKey={pid, idx:+i};
+    $('gTitle').value=g.title||''; $('gNote').value=g.note||''; $('gEx').value=g.example||'';
+    fillPassSelect(pid);
+    $('gSave').textContent='수정 저장';
+    $('form').classList.add('open');
+    $('form').scrollIntoView({behavior:'smooth',block:'center'});
+  });
+}
+function arrOf(pid){
+  if (!pid){ DB.grammars=DB.grammars||[]; return DB.grammars; }
+  const p=DB.passages.find(x=>x.id===pid);
+  p.grammars=p.grammars||[]; return p.grammars;
+}
+function fillPassSelect(sel){
+  $('gPass').innerHTML = `<option value="">— 지문에 연결하지 않음 —</option>` +
+    DB.passages.map(p=>`<option value="${p.id}"${sel===p.id?' selected':''}>${esc(p.title||'제목 없음')}</option>`).join('');
+}
+
+/* ================= 입력 ================= */
+$('addBtn').onclick=()=>{
+  editKey=null;
+  $('gTitle').value=''; $('gNote').value=''; $('gEx').value='';
+  fillPassSelect(DB.passages[0]?DB.passages[0].id:'');
+  $('gSave').textContent='추가';
+  $('form').classList.toggle('open');
+  if ($('form').classList.contains('open')) $('gTitle').focus();
+};
+$('gCancel').onclick=()=>{ $('form').classList.remove('open'); editKey=null; };
+$('gSave').onclick=()=>{
+  const title=$('gTitle').value.trim();
+  if (!title){ toast('문법 포인트를 입력하세요'); $('gTitle').focus(); return; }
+  const item={title, note:$('gNote').value.trim(), example:$('gEx').value.trim()};
+  const target=$('gPass').value;
+  if (editKey){
+    if (editKey.pid===target){ arrOf(target)[editKey.idx]=item; }
+    else { arrOf(editKey.pid).splice(editKey.idx,1); arrOf(target).push(item); }
+    editKey=null;
+  } else arrOf(target).push(item);
+  $('form').classList.remove('open');
+  save('문법 저장: '+title); render();
+};
+$('search').oninput=e=>{ query=e.target.value; render(); };
+
+/* ================= 편집 권한 ================= */
+function openKey(){
+  $('kOwner').value=CFG.owner; $('kRepo').value=CFG.repo;
+  $('kBranch').value=CFG.branch||'main'; $('kPath').value=CFG.path||'data.json';
+  $('kToken').value=CFG.token;
+  $('keyVeil').classList.add('open');
+}
+$('keyBtn').onclick=openKey;
+$('kCancel').onclick=()=>$('keyVeil').classList.remove('open');
+$('keyVeil').onclick=e=>{ if(e.target===$('keyVeil')) $('keyVeil').classList.remove('open'); };
+$('kForget').onclick=()=>{
+  CFG.token=''; writeCfg(false); canEdit=false;
+  document.body.classList.remove('can-edit');
+  $('keyBtn').classList.remove('on'); $('keyBtn').textContent='🔒 편집';
+  $('keyVeil').classList.remove('open'); setStatus(''); render(); toast('편집 권한을 껐습니다');
+};
+$('kSave').onclick=async()=>{
+  CFG.owner=$('kOwner').value.trim(); CFG.repo=$('kRepo').value.trim();
+  CFG.branch=$('kBranch').value.trim()||'main'; CFG.path=$('kPath').value.trim()||'data.json';
+  CFG.token=$('kToken').value.trim();
+  if(!CFG.owner||!CFG.repo||!CFG.token){ toast('아이디 · 저장소 · 토큰을 모두 입력하세요'); return; }
+  toast('확인 중…');
+  if(!await verify()){ toast('접근할 수 없습니다. 토큰 권한을 확인하세요'); return; }
+  writeCfg($('kRemember').checked);
+  canEdit=true;
+  document.body.classList.add('can-edit');
+  $('keyBtn').classList.add('on'); $('keyBtn').textContent='🔓 편집 중';
+  $('keyVeil').classList.remove('open'); setStatus('연결됨'); render();
+};
+async function verify(){
+  try{
+    const r=await fetch(`https://api.github.com/repos/${CFG.owner}/${CFG.repo}`,{headers:ghHeaders()});
+    if(!r.ok) return false;
+    const j=await r.json();
+    if(!j.permissions||!j.permissions.push) return false;
+    await fetchSha(); return true;
+  }catch(e){ return false; }
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') $('keyVeil').classList.remove('open'); });
+
+/* ================= 시작 ================= */
+(async function init(){
+  readCfg();
+  await loadData();
+  if (CFG.token&&CFG.owner&&CFG.repo){
+    canEdit=await verify();
+    if (canEdit){
+      document.body.classList.add('can-edit');
+      $('keyBtn').classList.add('on'); $('keyBtn').textContent='🔓 편집 중';
+    }
+  }
+  fillPassSelect('');
+  setStatus('연결됨');
+  render();
+})();
+</script>
+</body>
+</html>

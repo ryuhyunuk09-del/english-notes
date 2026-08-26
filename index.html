@@ -9,45 +9,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#eef1f7;
-  --surface:#ffffff;
-  --paper:#fffdf8;
-  --paper-edge:#ece4d3;
-  --ink:#151b28;
-  --ink-soft:#5a6478;
-  --ink-faint:#8d96a8;
-  --line:#dee3ed;
-  --marker:#ffd45e;
-  --marker-hl:rgba(255,212,94,.62);
-  --marker-hl-on:rgba(255,196,20,.85);
-  --teal:#0e7c6b;
-  --rose:#c0453f;
-  --r:10px;
+  --bg:#eef1f7; --surface:#ffffff; --paper:#fffdf8; --paper-edge:#ece4d3;
+  --ink:#151b28; --ink-soft:#5a6478; --ink-faint:#8d96a8; --line:#dee3ed;
+  --marker:#ffd45e; --marker-hl:rgba(255,212,94,.62); --marker-hl-on:rgba(255,196,20,.85);
+  --teal:#0e7c6b; --rose:#c0453f; --r:10px;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
-body{
-  background:var(--bg);color:var(--ink);
-  font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;
-  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
-}
+body{background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit;}
 button{cursor:pointer;}
-
-/* 읽기 모드에서는 편집 요소를 감춥니다 */
 body:not(.can-edit) .edit-only{display:none!important;}
 
 .wrap{display:flex;min-height:100vh;}
-.side{
-  width:292px;flex:0 0 292px;background:var(--surface);
-  border-right:1px solid var(--line);display:flex;flex-direction:column;
-  position:sticky;top:0;height:100vh;
-}
+.side{width:292px;flex:0 0 292px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;}
 .main{flex:1;min-width:0;padding:34px 40px 90px;}
 
 .brand{padding:22px 20px 16px;border-bottom:1px solid var(--line);}
 .brand h1{margin:0;font-family:'Literata',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.01em;}
 .brand .sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:5px;}
+.nav{display:flex;gap:6px;margin-top:12px;}
+.nav a{
+  font-size:12.5px;text-decoration:none;padding:6px 12px;border-radius:7px;
+  border:1px solid var(--line);color:var(--ink-soft);background:#fff;
+}
+.nav a.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500;}
+.nav a:hover:not(.on){background:#f2f5fa;color:var(--ink);}
 
 .side-tools{padding:14px 16px 10px;display:flex;flex-direction:column;gap:10px;}
 .search{width:100%;padding:9px 12px;border-radius:8px;background:#f4f6fa;border:1px solid var(--line);outline:none;}
@@ -66,7 +53,6 @@ body:not(.can-edit) .edit-only{display:none!important;}
 .pitem .m{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);margin-top:4px;letter-spacing:.04em;}
 
 .side-foot{padding:12px 16px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;}
-
 .btn{padding:9px 15px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:13px;}
 .btn:hover{background:#f2f5fa;}
 .btn-fill{background:var(--marker);border-color:var(--marker);color:#3d2c00;font-weight:500;}
@@ -74,28 +60,35 @@ body:not(.can-edit) .edit-only{display:none!important;}
 .btn-sm{padding:6px 11px;font-size:12px;border-radius:7px;}
 .btn-ghost{background:transparent;border-color:transparent;color:var(--ink-soft);}
 .btn-ghost:hover{color:var(--ink);background:#f2f5fa;}
-.btn-key.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.btn-key.on,.btn-tr.on{background:var(--marker);border-color:var(--marker);color:#3d2c00;font-weight:500;}
+.btn-ans.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:500;}
 
 .phead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:20px;}
 .phead h2{margin:0;font-family:'Literata',Georgia,serif;font-size:28px;font-weight:600;letter-spacing:-.015em;line-height:1.25;}
 .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
 .meta .chip{padding:2px 8px;border:1px solid var(--line);border-radius:999px;background:#fff;}
-.acts{display:flex;gap:7px;flex-shrink:0;}
+.acts{display:flex;gap:7px;flex-shrink:0;flex-wrap:wrap;}
 
-.paper{
-  background:var(--paper);border:1px solid var(--paper-edge);border-radius:14px;
-  padding:34px 38px;box-shadow:0 10px 26px rgba(30,45,80,.07);
-  font-family:'Literata',Georgia,serif;font-size:16.5px;line-height:1.95;
-  white-space:pre-wrap;word-break:break-word;
-}
-mark.hl{
-  background:linear-gradient(to bottom,transparent 8%,var(--marker-hl) 8%,var(--marker-hl) 88%,transparent 88%);
-  color:inherit;font-weight:600;padding:0 1px;border-radius:2px;cursor:pointer;
-}
+.paper{background:var(--paper);border:1px solid var(--paper-edge);border-radius:14px;padding:34px 38px;box-shadow:0 10px 26px rgba(30,45,80,.07);font-family:'Literata',Georgia,serif;font-size:16.5px;line-height:1.95;white-space:pre-wrap;word-break:break-word;}
+mark.hl{background:linear-gradient(to bottom,transparent 8%,var(--marker-hl) 8%,var(--marker-hl) 88%,transparent 88%);color:inherit;font-weight:600;padding:0 1px;border-radius:2px;cursor:pointer;}
 mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-hl-on) 8%,var(--marker-hl-on) 88%,transparent 88%);}
+.trans-block{margin-top:24px;padding-top:18px;border-top:1px dashed var(--paper-edge);font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:1.9;color:#645c50;white-space:pre-wrap;}
+.trans-block .lead{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#a2957f;display:block;margin-bottom:10px;}
+
+/* 문제 · 선지 */
+.qbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;}
+.qtext{font-weight:500;margin-bottom:14px;white-space:pre-wrap;}
+.choice{display:flex;gap:11px;padding:11px 12px;border-radius:9px;align-items:flex-start;}
+.choice + .choice{margin-top:2px;}
+.choice.ans{background:rgba(14,124,107,.10);box-shadow:inset 2px 0 0 var(--teal);}
+.choice .cn{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-faint);padding-top:1px;min-width:18px;}
+.choice.ans .cn{color:var(--teal);font-weight:500;}
+.choice .ctext{flex:1;min-width:0;font-family:'Literata',Georgia,serif;font-size:15.5px;line-height:1.7;white-space:pre-wrap;}
+.choice .ctr{font-family:'Noto Sans KR',sans-serif;font-size:13.5px;color:var(--ink-soft);margin-top:5px;padding-left:11px;border-left:2px solid rgba(255,196,20,.55);white-space:pre-wrap;}
+.ans-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;background:var(--teal);color:#fff;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:2px;}
 
 .sec{margin-top:34px;}
-.sec-head{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:14px;border-bottom:1px solid var(--line);}
+.sec-head{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:14px;border-bottom:1px solid var(--line);flex-wrap:wrap;}
 .sec-head .lbl{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);}
 .sec-head .n{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);}
 .sec-head .sp{flex:1;}
@@ -109,38 +102,25 @@ mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-h
 .pos{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);margin-left:8px;}
 .mean{margin-top:2px;color:var(--ink);}
 .ex{font-family:'Literata',Georgia,serif;font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:6px;padding-left:11px;border-left:2px solid rgba(14,124,107,.35);}
-.trans-block{
-  margin-top:24px;padding-top:18px;border-top:1px dashed var(--paper-edge);
-  font-family:'Noto Sans KR',sans-serif;font-size:14.5px;line-height:1.9;
-  color:#645c50;white-space:pre-wrap;
-}
-.trans-block .lead{
-  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;
-  text-transform:uppercase;color:#a2957f;display:block;margin-bottom:10px;
-}
-.btn-tr.on{background:var(--marker);border-color:var(--marker);color:#3d2c00;font-weight:500;}
 
-/* 뜻 목록 */
 .senses{margin-top:6px;display:flex;flex-direction:column;gap:8px;}
 .sense{display:flex;gap:9px;align-items:flex-start;padding:5px 8px;border-radius:7px;}
 .sense.used{background:rgba(255,212,94,.20);box-shadow:inset 2px 0 0 var(--marker);}
 .sense .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);padding-top:3px;min-width:16px;}
 .sense.used .num{color:#8a6b00;font-weight:500;}
 .sense .txt{flex:1;min-width:0;}
-.used-tag{
-  font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;
-  background:var(--marker);color:#3d2c00;padding:2px 7px;border-radius:999px;
-  margin-left:8px;vertical-align:2px;white-space:nowrap;
+.used-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;background:var(--marker);color:#3d2c00;padding:2px 7px;border-radius:999px;margin-left:8px;vertical-align:2px;white-space:nowrap;}
+
+/* 유의어 · 반의어 */
+.rel{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:9px;}
+.rel .rl{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--ink-faint);margin-right:2px;}
+.wchip{
+  font-family:'Literata',Georgia,serif;font-size:13.5px;
+  padding:2px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;
 }
+.wchip.syn{border-color:rgba(14,124,107,.45);color:#0b6558;background:rgba(14,124,107,.07);}
+.wchip.ant{border-color:rgba(192,69,63,.4);color:#a53c37;background:rgba(192,69,63,.06);}
 
-/* 뜻 입력 줄 */
-.sense-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-.sense-row .pick{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink-soft);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
-.sense-row .s-m{flex:0 0 34%;}
-.sense-row .s-ex{flex:1;}
-
-.g-title{font-size:15px;font-weight:700;}
-.g-title .badge{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;color:#fff;background:var(--teal);padding:2px 7px;border-radius:4px;margin-right:9px;vertical-align:2px;}
 .row-acts{display:flex;gap:2px;align-items:flex-start;}
 .ico{background:transparent;border:0;color:var(--ink-faint);padding:4px 7px;border-radius:6px;font-size:13px;line-height:1;}
 .ico:hover{background:#f0f3f8;color:var(--ink);}
@@ -149,7 +129,6 @@ mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-h
 .form{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px;display:none;}
 .form.open{display:block;}
 .grid{display:grid;gap:10px;}
-.g3{grid-template-columns:1.1fr .5fr 1.4fr;}
 .g2{grid-template-columns:1fr 1fr;}
 .g1{grid-template-columns:1fr;}
 .fld{display:flex;flex-direction:column;gap:5px;}
@@ -157,26 +136,28 @@ mark.hl:hover{background:linear-gradient(to bottom,transparent 8%,var(--marker-h
 .in{width:100%;padding:9px 11px;border-radius:8px;background:#f7f9fc;border:1px solid var(--line);outline:none;}
 .in:focus{border-color:var(--marker);background:#fff;}
 .in::placeholder{color:#a8b0c0;}
-textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
+textarea.in{resize:vertical;min-height:80px;line-height:1.7;}
 .form-foot{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;}
+
+.sense-row,.ch-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+.sense-row .s-m{flex:0 0 34%;}
+.sense-row .s-ex{flex:1;}
+.ch-row .c-t{flex:1;}
+.ch-row .c-tr{flex:1;}
+.pick{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink-soft);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
 
 .empty{border:1px dashed var(--line);border-radius:var(--r);padding:26px;text-align:center;color:var(--ink-faint);font-size:14px;background:#fff;}
 
 .veil{display:none;position:fixed;inset:0;background:rgba(21,27,40,.45);z-index:50;padding:28px;overflow-y:auto;}
 .veil.open{display:block;}
-.modal{max-width:720px;margin:24px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 24px 60px rgba(21,27,40,.22);}
+.modal{max-width:760px;margin:24px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:0 24px 60px rgba(21,27,40,.22);}
 .modal h3{margin:0 0 6px;font-family:'Literata',Georgia,serif;font-size:20px;font-weight:600;}
 .modal .hint{color:var(--ink-soft);font-size:13px;margin:0 0 18px;line-height:1.65;}
-.modal .hint a{color:var(--teal);}
 .modal .hint code{background:#f0f3f8;padding:1px 5px;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
 
 .toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:var(--ink);color:#fff;font-size:13px;padding:10px 20px;border-radius:999px;opacity:0;transition:.28s ease;z-index:80;pointer-events:none;max-width:88vw;text-align:center;}
 .toast.show{opacity:1;transform:translate(-50%,0);}
-
-.status{
-  font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);
-  padding:0 16px 12px;
-}
+.status{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);padding:0 16px 12px;}
 .status b{color:var(--teal);font-weight:500;}
 
 .mobile-bar{display:none;}
@@ -187,12 +168,23 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
   .plist{max-height:46vh;}
   .main{padding:22px 18px 70px;}
   .paper{padding:24px 20px;font-size:16px;line-height:1.9;}
+  .qbox{padding:16px 14px;}
   .phead{flex-direction:column;gap:12px;}
   .phead h2{font-size:23px;}
-  .g3,.g2{grid-template-columns:1fr;}
+  .g2{grid-template-columns:1fr;}
   .mobile-bar{display:block;}
   .veil{padding:0;}
   .modal{margin:0;border-radius:0;min-height:100vh;}
+  .sense-row,.ch-row{
+    flex-wrap:wrap;gap:6px;padding:10px;margin-bottom:10px;
+    border:1px solid var(--line);border-radius:9px;background:#f7f9fc;
+  }
+  .sense-row .s-m,.sense-row .s-ex,.ch-row .c-t,.ch-row .c-tr{flex:1 1 100%;order:1;}
+  .sense-row .s-ex,.ch-row .c-tr{order:2;}
+  .sense-row .pick,.ch-row .pick{order:3;}
+  .sense-row .pick::after{content:'지문에서 쓰인 뜻';}
+  .ch-row .pick::after{content:'정답';}
+  .s-del,.c-del{order:4;margin-left:auto;}
 }
 :focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
@@ -204,7 +196,11 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
   <aside class="side" id="side">
     <div class="brand">
       <h1>영어 지문 노트</h1>
-      <div class="sub">Passages · Words · Grammar</div>
+      <div class="sub">Passages · Words</div>
+      <div class="nav">
+        <a href="./" class="on">지문</a>
+        <a href="./grammar.html">문법</a>
+      </div>
       <button class="btn btn-sm mobile-bar" id="toggleSide" style="margin-top:12px;">목록 접기</button>
     </div>
 
@@ -214,14 +210,12 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
     </div>
 
     <div class="plist" id="plist"></div>
-
     <div class="status" id="status"></div>
 
     <div class="side-foot">
       <button class="btn btn-sm btn-fill edit-only" id="newBtn" style="flex:1;">+ 지문 추가</button>
       <button class="btn btn-sm btn-key" id="keyBtn" title="편집 권한">🔒 편집</button>
       <button class="btn btn-sm" id="exportBtn" title="JSON 내려받기">↓</button>
-      <input type="file" id="importFile" accept="application/json" hidden>
     </div>
   </aside>
 
@@ -236,10 +230,16 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
       <div class="fld"><label>제목</label><input class="in" id="fTitle" placeholder="예) 사회 규범과 개인의 선택"></div>
       <div class="grid g2">
         <div class="fld"><label>출처</label><input class="in" id="fSource" placeholder="예) 2026 고2 모의고사 32번"></div>
-        <div class="fld"><label>태그 (쉼표로 구분)</label><input class="in" id="fTags" placeholder="예) 모의고사, 사회"></div>
+        <div class="fld"><label>태그 (쉼표로 구분)</label><input class="in" id="fTags" placeholder="예) 사회, 추상어휘"></div>
       </div>
-      <div class="fld"><label>지문</label><textarea class="in" id="fBody" rows="12" placeholder="영어 지문을 붙여넣으세요"></textarea></div>
-      <div class="fld"><label>해석</label><textarea class="in" id="fTrans" rows="8" placeholder="지문 전체 해석을 적으세요"></textarea></div>
+      <div class="fld"><label>지문</label><textarea class="in" id="fBody" rows="11" placeholder="영어 지문을 붙여넣으세요"></textarea></div>
+      <div class="fld"><label>해석</label><textarea class="in" id="fTrans" rows="6" placeholder="지문 전체 해석"></textarea></div>
+      <div class="fld"><label>문제 발문 (없으면 비워두세요)</label><textarea class="in" id="fQ" rows="2" style="min-height:56px;" placeholder="예) 윗글의 요지로 가장 적절한 것은?"></textarea></div>
+      <div class="fld">
+        <label>선지 &nbsp;— &nbsp;왼쪽 동그라미로 정답을 고르세요</label>
+        <div id="choiceRows"></div>
+        <button class="btn btn-sm" id="addChoice" style="align-self:flex-start;">+ 선지 추가</button>
+      </div>
     </div>
     <div class="form-foot">
       <button class="btn" id="mCancel">취소</button>
@@ -252,10 +252,7 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
 <div class="veil" id="keyVeil">
   <div class="modal">
     <h3>편집 권한 열기</h3>
-    <p class="hint">
-      GitHub 토큰을 넣으면 편집 모드가 열리고, 수정한 내용이 저장소의 <code>data.json</code>에 바로 커밋됩니다.
-      토큰은 이 브라우저에만 남고 사이트에는 올라가지 않습니다. 방문자는 읽기만 할 수 있습니다.
-    </p>
+    <p class="hint">GitHub 토큰을 넣으면 편집 모드가 열리고, 수정한 내용이 저장소의 <code>data.json</code>에 바로 커밋됩니다. 토큰은 이 브라우저에만 남습니다.</p>
     <div class="grid g1">
       <div class="grid g2">
         <div class="fld"><label>GitHub 아이디</label><input class="in" id="kOwner" placeholder="your-id"></div>
@@ -284,130 +281,97 @@ textarea.in{resize:vertical;min-height:90px;line-height:1.7;}
 /* ================= state ================= */
 let DB = { passages: [] };
 let CFG = { owner:'', repo:'', branch:'main', path:'data.json', token:'' };
-let fileSha = null;
-let canEdit = false;
-let currentId = null, editingPassageId = null, editWordIdx = null, editGramIdx = null;
-let query = '', activeTag = null, showTrans = false;
+let fileSha = null, canEdit = false;
+let currentId = null, editingPassageId = null, editWordIdx = null;
+let query = '', activeTag = null, showTrans = false, showCTrans = false, showAns = false;
 
 const $ = id => document.getElementById(id);
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const CIRC = ['①','②','③','④','⑤','⑥','⑦','⑧'];
 
-/* ================= 로컬 설정 (토큰 보관) ================= */
+/* ================= 설정 보관 ================= */
 function readCfg(){
-  try{
-    const raw = window.localStorage.getItem('en-notes-cfg');
-    if (raw) Object.assign(CFG, JSON.parse(raw));
-  }catch(e){/* 저장소 사용 불가 — 세션 동안만 유지 */}
+  try{ const raw = window.localStorage.getItem('en-notes-cfg'); if (raw) Object.assign(CFG, JSON.parse(raw)); }
+  catch(e){}
 }
 function writeCfg(remember){
-  try{
-    if (remember) window.localStorage.setItem('en-notes-cfg', JSON.stringify(CFG));
-    else window.localStorage.removeItem('en-notes-cfg');
-  }catch(e){/* 무시 */}
+  try{ remember ? window.localStorage.setItem('en-notes-cfg', JSON.stringify(CFG))
+                : window.localStorage.removeItem('en-notes-cfg'); }catch(e){}
 }
 
 /* ================= 유틸 ================= */
 const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rxEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const listOf = s => String(s||'').split(/[,،、]/).map(x=>x.trim()).filter(Boolean);
 
 function b64encode(str){
   const bytes = new TextEncoder().encode(str);
-  let bin = '';
+  let bin='';
   for (let i=0;i<bytes.length;i+=0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+0x8000));
   return btoa(bin);
 }
-function b64decode(b64){
-  const bin = atob(b64.replace(/\s/g,''));
-  const bytes = Uint8Array.from(bin, c=>c.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
-}
-
-let toastTimer = null;
+let toastTimer=null;
 function toast(msg){
-  const t = $('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+  const t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2400);
 }
 
-/* ================= 데이터 읽기 ================= */
+/* ================= 데이터 ================= */
 async function loadData(){
-  // 같은 폴더의 data.json 을 읽습니다 (방문자도 여기서 읽습니다).
-  // 저장소 안 하위 폴더에 두어도 상대경로라 그대로 동작합니다.
   try{
-    const r = await fetch('./data.json?v=' + Date.now(), {cache:'no-store'});
-    if (r.ok){
-      const d = await r.json();
-      if (d && Array.isArray(d.passages)) { DB = d; return true; }
-    }
-  }catch(e){/* 아직 파일이 없을 수 있습니다 */}
+    const r = await fetch('./data.json?v='+Date.now(), {cache:'no-store'});
+    if (r.ok){ const d = await r.json(); if (d && Array.isArray(d.passages)){ DB=d; return true; } }
+  }catch(e){}
   return false;
-}
-
-/* 커밋에 필요한 현재 sha 확인 */
-async function fetchSha(){
-  if (!CFG.token || !CFG.owner || !CFG.repo) return null;
-  try{
-    const r = await fetch(api(), {headers: ghHeaders()});
-    if (r.status === 404) { fileSha = null; return null; }
-    if (!r.ok) throw new Error(r.status);
-    const j = await r.json();
-    fileSha = j.sha;
-    return j.sha;
-  }catch(e){ return null; }
 }
 function api(){
   return `https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}` +
-         (CFG.branch ? `?ref=${encodeURIComponent(CFG.branch)}` : '');
+         (CFG.branch?`?ref=${encodeURIComponent(CFG.branch)}`:'');
 }
 function ghHeaders(){
-  return {
-    'Authorization': 'Bearer ' + CFG.token,
-    'Accept': 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28'
-  };
+  return {'Authorization':'Bearer '+CFG.token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'};
+}
+async function fetchSha(){
+  if (!CFG.token||!CFG.owner||!CFG.repo) return null;
+  try{
+    const r = await fetch(api(), {headers:ghHeaders()});
+    if (r.status===404){ fileSha=null; return null; }
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json(); fileSha=j.sha; return j.sha;
+  }catch(e){ return null; }
 }
 
-/* ================= 저장 (GitHub 커밋) ================= */
-let saveTimer = null, saving = false;
+let saveTimer=null, saving=false;
 function save(msg){
   if (!canEdit) return;
   setStatus('저장 대기…');
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(()=>commit(msg), 900);
+  saveTimer=setTimeout(()=>commit(msg),900);
 }
 async function commit(msg){
-  if (saving) { save(msg); return; }
-  saving = true;
-  setStatus('저장 중…');
+  if (saving){ save(msg); return; }
+  saving=true; setStatus('저장 중…');
   try{
-    if (fileSha === null) await fetchSha();
+    if (fileSha===null) await fetchSha();
     const url = `https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}`;
     const body = {
-      message: msg || ('노트 업데이트 ' + new Date().toLocaleString('ko-KR')),
-      content: b64encode(JSON.stringify(DB, null, 2)),
-      branch: CFG.branch || 'main'
+      message: msg || ('노트 업데이트 '+new Date().toLocaleString('ko-KR')),
+      content: b64encode(JSON.stringify(DB,null,2)),
+      branch: CFG.branch||'main'
     };
-    if (fileSha) body.sha = fileSha;
-
-    let r = await fetch(url, {method:'PUT', headers:{...ghHeaders(),'Content-Type':'application/json'}, body:JSON.stringify(body)});
-
-    if (r.status === 409 || r.status === 422){   // 다른 곳에서 먼저 바뀐 경우
-      await fetchSha();
-      if (fileSha) body.sha = fileSha;
-      r = await fetch(url, {method:'PUT', headers:{...ghHeaders(),'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    if (fileSha) body.sha=fileSha;
+    let r = await fetch(url,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if (r.status===409||r.status===422){
+      await fetchSha(); if (fileSha) body.sha=fileSha;
+      r = await fetch(url,{method:'PUT',headers:{...ghHeaders(),'Content-Type':'application/json'},body:JSON.stringify(body)});
     }
-    if (!r.ok){
-      const t = await r.text();
-      throw new Error(r.status + ' ' + t.slice(0,120));
-    }
-    const j = await r.json();
-    fileSha = j.content && j.content.sha;
-    setStatus('저장됨 · ' + new Date().toLocaleTimeString('ko-KR'));
+    if (!r.ok){ const t=await r.text(); throw new Error(r.status+' '+t.slice(0,120)); }
+    const j = await r.json(); fileSha = j.content && j.content.sha;
+    setStatus('저장됨 · '+new Date().toLocaleTimeString('ko-KR'));
   }catch(e){
     setStatus('저장 실패');
-    toast('저장 실패 — 토큰과 저장소 설정을 확인하세요 (' + e.message + ')');
-  }finally{ saving = false; }
+    toast('저장 실패 — 토큰과 저장소 설정을 확인하세요 ('+e.message+')');
+  }finally{ saving=false; }
 }
 function setStatus(s){
   $('status').innerHTML = canEdit
@@ -415,39 +379,41 @@ function setStatus(s){
     : '읽기 모드 · 편집하려면 🔒 를 누르세요';
 }
 
-/* ================= 지문 렌더 ================= */
+/* ================= 지문 본문 ================= */
 function renderPassageBody(p){
   const terms = (p.words||[]).map((w,i)=>({t:(w.term||'').trim(), i}))
     .filter(o=>o.t.length>0).sort((a,b)=>b.t.length-a.t.length);
   if (!terms.length) return esc(p.body);
-
   const parts = terms.map(o=>{
     const base = rxEsc(o.t);
-    return /\s/.test(o.t) ? base : base + '(?:s|es|ed|ing|d|ies|ly)?';
+    return /\s/.test(o.t) ? base : base+'(?:s|es|ed|ing|d|ies|ly)?';
   });
-  const re = new RegExp('(?<![\\w-])(' + parts.join('|') + ')(?![\\w-])','gi');
-
+  const re = new RegExp('(?<![\\w-])('+parts.join('|')+')(?![\\w-])','gi');
   let out='', last=0, m;
-  while ((m = re.exec(p.body)) !== null){
-    const hit = m[0].toLowerCase();
-    let idx = terms.findIndex(o=>hit === o.t.toLowerCase());
-    if (idx === -1) idx = terms.findIndex(o=>hit.startsWith(o.t.toLowerCase()));
-    out += esc(p.body.slice(last, m.index));
+  while ((m=re.exec(p.body))!==null){
+    const hit=m[0].toLowerCase();
+    let idx=terms.findIndex(o=>hit===o.t.toLowerCase());
+    if (idx===-1) idx=terms.findIndex(o=>hit.startsWith(o.t.toLowerCase()));
+    out += esc(p.body.slice(last,m.index));
     out += '<mark class="hl" data-w="'+terms[Math.max(idx,0)].i+'">'+esc(m[0])+'</mark>';
-    last = m.index + m[0].length;
-    if (m.index === re.lastIndex) re.lastIndex++;
+    last = m.index+m[0].length;
+    if (m.index===re.lastIndex) re.lastIndex++;
   }
   out += esc(p.body.slice(last));
   return out;
 }
 
+function senses(w){
+  if (Array.isArray(w.senses) && w.senses.length) return w.senses;
+  return [{meaning:w.meaning||'', example:w.example||''}];
+}
+
+/* ================= 목록 ================= */
 function allTags(){
-  const s = new Set();
-  DB.passages.forEach(p=>(p.tags||[]).forEach(t=>s.add(t)));
-  return [...s].sort();
+  const s=new Set(); DB.passages.forEach(p=>(p.tags||[]).forEach(t=>s.add(t))); return [...s].sort();
 }
 function filtered(){
-  const q = query.trim().toLowerCase();
+  const q=query.trim().toLowerCase();
   return DB.passages.filter(p=>{
     if (activeTag && !(p.tags||[]).includes(activeTag)) return false;
     if (!q) return true;
@@ -456,46 +422,46 @@ function filtered(){
     if ((p.source||'').toLowerCase().includes(q)) return true;
     if ((p.words||[]).some(w=>
       (w.term||'').toLowerCase().includes(q) ||
+      (w.syn||'').toLowerCase().includes(q) ||
+      (w.ant||'').toLowerCase().includes(q) ||
       senses(w).some(s=>(s.meaning||'').toLowerCase().includes(q))
     )) return true;
-    if ((p.grammars||[]).some(g=>(g.title||'').toLowerCase().includes(q))) return true;
     return false;
   });
 }
-
 function renderSide(){
-  const tb = $('tagbar');
+  const tb=$('tagbar');
   tb.innerHTML = allTags().map(t=>`<button class="tag${activeTag===t?' on':''}" data-tag="${esc(t)}">${esc(t)}</button>`).join('');
   tb.querySelectorAll('[data-tag]').forEach(b=>b.onclick=()=>{
-    activeTag = activeTag===b.dataset.tag ? null : b.dataset.tag;
-    renderSide();
+    activeTag = activeTag===b.dataset.tag?null:b.dataset.tag; renderSide();
   });
   renderList();
 }
 function renderList(){
-  const list = filtered(), el = $('plist');
+  const list=filtered(), el=$('plist');
   if (!list.length){
-    el.innerHTML = '<div style="padding:20px 12px;color:var(--ink-faint);font-size:13px;">'+
-      (DB.passages.length ? '조건에 맞는 지문이 없습니다.' : '아직 지문이 없습니다.')+'</div>';
+    el.innerHTML='<div style="padding:20px 12px;color:var(--ink-faint);font-size:13px;">'+
+      (DB.passages.length?'조건에 맞는 지문이 없습니다.':'아직 지문이 없습니다.')+'</div>';
     return;
   }
   el.innerHTML = list.map(p=>`
     <button class="pitem${p.id===currentId?' on':''}" data-id="${p.id}">
       <div class="t">${esc(p.title||'제목 없음')}</div>
-      <div class="m">단어 ${(p.words||[]).length} · 문법 ${(p.grammars||[]).length}${p.source?' · '+esc(p.source):''}</div>
+      <div class="m">단어 ${(p.words||[]).length}${(p.choices||[]).length?' · 선지 '+p.choices.length:''}${p.source?' · '+esc(p.source):''}</div>
     </button>`).join('');
   el.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{
-    currentId = b.dataset.id; renderList(); renderMain();
+    currentId=b.dataset.id; renderList(); renderMain();
     window.scrollTo({top:0,behavior:'smooth'});
   });
 }
 
+/* ================= 본문 ================= */
 function renderMain(){
-  const p = DB.passages.find(x=>x.id===currentId), m = $('main');
-  if (!p){
-    m.innerHTML = `<div class="empty" style="margin-top:60px;">왼쪽에서 지문을 고르세요.</div>`;
-    return;
-  }
+  const p = DB.passages.find(x=>x.id===currentId), m=$('main');
+  if (!p){ m.innerHTML=`<div class="empty" style="margin-top:60px;">왼쪽에서 지문을 고르세요.</div>`; return; }
+  const ch = p.choices||[];
+  const hasCTrans = ch.some(c=>c.trans);
+
   m.innerHTML = `
     <div class="phead">
       <div style="min-width:0;">
@@ -503,7 +469,7 @@ function renderMain(){
         <div class="meta">
           ${p.source?`<span class="chip">${esc(p.source)}</span>`:''}
           ${(p.tags||[]).map(t=>`<span class="chip">#${esc(t)}</span>`).join('')}
-          <span>단어 ${(p.words||[]).length} · 문법 ${(p.grammars||[]).length}</span>
+          <span>단어 ${(p.words||[]).length}</span>
         </div>
       </div>
       <div class="acts">
@@ -518,6 +484,28 @@ function renderMain(){
     <div class="paper" id="paper">${renderPassageBody(p)}${
       p.trans?`<div class="trans-block" id="transBlock"${showTrans?'':' style="display:none;"'}><span class="lead">해석</span>${esc(p.trans)}</div>`:''
     }</div>
+
+    ${ch.length?`
+    <section class="sec">
+      <div class="sec-head">
+        <span class="lbl">Question</span>
+        <span class="sp"></span>
+        ${hasCTrans?`<button class="btn btn-sm btn-tr${showCTrans?' on':''}" id="ctrBtn">선지 해석</button>`:''}
+        ${Number.isInteger(p.answer)?`<button class="btn btn-sm btn-ans${showAns?' on':''}" id="ansBtn">정답</button>`:''}
+      </div>
+      <div class="qbox">
+        ${p.question?`<div class="qtext">${esc(p.question)}</div>`:''}
+        ${ch.map((c,i)=>{
+          const on = showAns && p.answer===i;
+          return `<div class="choice${on?' ans':''}">
+            <span class="cn">${CIRC[i]||(i+1)}</span>
+            <div class="ctext">${esc(c.text||'')}${on?'<span class="ans-tag">정답</span>':''}
+              ${c.trans?`<div class="ctr"${showCTrans?'':' style="display:none;"'}>${esc(c.trans)}</div>`:''}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </section>`:''}
 
     <section class="sec">
       <div class="sec-head">
@@ -542,89 +530,74 @@ function renderMain(){
           <div id="senseRows"></div>
           <button class="btn btn-sm" id="addSense" style="align-self:flex-start;">+ 뜻 추가</button>
         </div>
+        <div class="grid g2" style="margin-top:12px;">
+          <div class="fld"><label>유의어 (쉼표로 구분)</label><input class="in" id="wSyn" placeholder="notice, perceive"></div>
+          <div class="fld"><label>반의어 (쉼표로 구분)</label><input class="in" id="wAnt" placeholder="ignore, overlook"></div>
+        </div>
         <div class="form-foot">
           <button class="btn btn-sm" id="wCancel">취소</button>
           <button class="btn btn-sm btn-fill" id="wSave">추가</button>
         </div>
       </div>
       <div id="wordList"></div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head">
-        <span class="lbl">Grammar</span><span class="n">${(p.grammars||[]).length}</span>
-        <span class="sp"></span>
-        <button class="btn btn-sm btn-fill edit-only" id="addGramBtn">+ 문법</button>
-      </div>
-      <div class="form" id="gramForm">
-        <div class="grid g1">
-          <div class="fld"><label>문법 포인트</label><input class="in" id="gTitle" placeholder="현재완료의 계속적 용법"></div>
-          <div class="fld"><label>설명</label><textarea class="in" id="gNote" rows="3" placeholder="과거부터 현재까지 이어지는 상태 → have p.p."></textarea></div>
-          <div class="fld"><label>지문 속 문장</label><input class="in" id="gEx" placeholder="assumptions that have long been taken for granted"></div>
-        </div>
-        <div class="form-foot">
-          <button class="btn btn-sm" id="gCancel">취소</button>
-          <button class="btn btn-sm btn-fill" id="gSave">추가</button>
-        </div>
-      </div>
-      <div id="gramList"></div>
     </section>`;
 
-  if (p.trans) $('trBtn').onclick = ()=>{
-    showTrans = !showTrans;
-    $('transBlock').style.display = showTrans ? '' : 'none';
-    $('trBtn').classList.toggle('on', showTrans);
+  if (p.trans) $('trBtn').onclick=()=>{
+    showTrans=!showTrans;
+    $('transBlock').style.display = showTrans?'':'none';
+    $('trBtn').classList.toggle('on',showTrans);
   };
+  if (hasCTrans) $('ctrBtn').onclick=()=>{
+    showCTrans=!showCTrans;
+    document.querySelectorAll('.ctr').forEach(e=>e.style.display = showCTrans?'':'none');
+    $('ctrBtn').classList.toggle('on',showCTrans);
+  };
+  if (Number.isInteger(p.answer) && $('ansBtn')) $('ansBtn').onclick=()=>{ showAns=!showAns; renderMain(); };
 
   if (canEdit){
-    $('editP').onclick = ()=>openModal(p.id);
-    $('delP').onclick = ()=>{
-      if (!confirm('이 지문과 정리한 단어·문법을 모두 삭제할까요?')) return;
+    $('editP').onclick=()=>openModal(p.id);
+    $('delP').onclick=()=>{
+      if (!confirm('이 지문과 정리한 단어를 모두 삭제할까요?')) return;
       DB.passages = DB.passages.filter(x=>x.id!==p.id);
-      currentId = DB.passages[0] ? DB.passages[0].id : null;
+      currentId = DB.passages[0]?DB.passages[0].id:null;
       save('지문 삭제'); renderSide(); renderMain();
     };
-    $('addWordBtn').onclick = ()=>{ editWordIdx=null; resetWordForm(); $('wordForm').classList.toggle('open'); $('wTerm').focus(); };
-    $('addSense').onclick = ()=>{
-      const c = collectSenses();
-      c.list.push({meaning:'',example:''});
-      drawSenseRows(c.list, c.used);
-      const rows = $('senseRows').querySelectorAll('.s-m');
-      rows[rows.length-1].focus();
+    $('addWordBtn').onclick=()=>{ editWordIdx=null; resetWordForm(); $('wordForm').classList.toggle('open'); $('wTerm').focus(); };
+    $('addSense').onclick=()=>{
+      const c=collectSenses(); c.list.push({meaning:'',example:''});
+      drawSenseRows(c.list,c.used);
+      const rows=$('senseRows').querySelectorAll('.s-m'); rows[rows.length-1].focus();
     };
-    $('wCancel').onclick = ()=>{ $('wordForm').classList.remove('open'); editWordIdx=null; };
-    $('wSave').onclick = saveWord;
-    $('addGramBtn').onclick = ()=>{ editGramIdx=null; resetGramForm(); $('gramForm').classList.toggle('open'); $('gTitle').focus(); };
-    $('gCancel').onclick = ()=>{ $('gramForm').classList.remove('open'); editGramIdx=null; };
-    $('gSave').onclick = saveGram;
+    $('wCancel').onclick=()=>{ $('wordForm').classList.remove('open'); editWordIdx=null; };
+    $('wSave').onclick=saveWord;
   }
 
   $('paper').querySelectorAll('mark.hl').forEach(mk=>mk.onclick=()=>{
-    const row = document.querySelector(`[data-word-row="${mk.dataset.w}"]`);
+    const row=document.querySelector(`[data-word-row="${mk.dataset.w}"]`);
     if (!row) return;
     row.scrollIntoView({behavior:'smooth',block:'center'});
     row.classList.remove('flash'); void row.offsetWidth; row.classList.add('flash');
   });
 
-  renderWords(); renderGrams();
+  renderWords();
 }
 
 function renderWords(){
-  const p = DB.passages.find(x=>x.id===currentId), el = $('wordList');
+  const p=DB.passages.find(x=>x.id===currentId), el=$('wordList');
   if (!(p.words||[]).length){
-    el.innerHTML = '<div class="empty">추가한 단어는 지문에서 형광펜으로 표시됩니다.</div>';
+    el.innerHTML='<div class="empty">추가한 단어는 지문에서 형광펜으로 표시됩니다.</div>';
     return;
   }
   el.innerHTML = p.words.map((w,i)=>{
-    const ss = senses(w);
-    const one = ss.length <= 1;
+    const ss=senses(w), one=ss.length<=1;
+    const syn=listOf(w.syn), ant=listOf(w.ant);
     return `
     <div class="entry" data-word-row="${i}">
       <div class="body">
         <div><span class="term">${esc(w.term)}</span>${w.pos?`<span class="pos">${esc(w.pos)}</span>`:''}</div>
         <div class="senses">
           ${ss.map((s,si)=>{
-            const on = (w.used|0) === si && !one;
+            const on=(w.used|0)===si && !one;
             return `<div class="sense${on?' used':''}">
               ${one?'':`<span class="num">${si+1}</span>`}
               <div class="txt">
@@ -634,6 +607,8 @@ function renderWords(){
             </div>`;
           }).join('')}
         </div>
+        ${syn.length?`<div class="rel"><span class="rl">SYN</span>${syn.map(x=>`<span class="wchip syn">${esc(x)}</span>`).join('')}</div>`:''}
+        ${ant.length?`<div class="rel"><span class="rl">ANT</span>${ant.map(x=>`<span class="wchip ant">${esc(x)}</span>`).join('')}</div>`:''}
       </div>
       <div class="row-acts edit-only">
         <button class="ico" data-wedit="${i}" title="수정">✎</button>
@@ -645,9 +620,10 @@ function renderWords(){
     p.words.splice(+b.dataset.wdel,1); save('단어 삭제'); renderSide(); renderMain();
   });
   el.querySelectorAll('[data-wedit]').forEach(b=>b.onclick=()=>{
-    const i = +b.dataset.wedit, w = p.words[i];
-    editWordIdx = i;
+    const i=+b.dataset.wedit, w=p.words[i];
+    editWordIdx=i;
     $('wTerm').value=w.term||''; $('wPos').value=w.pos||'';
+    $('wSyn').value=w.syn||''; $('wAnt').value=w.ant||'';
     drawSenseRows(senses(w), w.used|0);
     $('wSave').textContent='수정 저장';
     $('wordForm').classList.add('open');
@@ -655,207 +631,179 @@ function renderWords(){
   });
 }
 
-function renderGrams(){
-  const p = DB.passages.find(x=>x.id===currentId), el = $('gramList');
-  if (!(p.grammars||[]).length){
-    el.innerHTML = '<div class="empty">이 지문에서 짚어둘 문법을 기록해 두세요.</div>';
-    return;
-  }
-  el.innerHTML = p.grammars.map((g,i)=>`
-    <div class="entry">
-      <div class="body">
-        <div class="g-title"><span class="badge">${String(i+1).padStart(2,'0')}</span>${esc(g.title)}</div>
-        ${g.note?`<div class="mean" style="margin-top:6px;">${esc(g.note)}</div>`:''}
-        ${g.example?`<div class="ex">${esc(g.example)}</div>`:''}
-      </div>
-      <div class="row-acts edit-only">
-        <button class="ico" data-gedit="${i}" title="수정">✎</button>
-        <button class="ico del" data-gdel="${i}" title="삭제">✕</button>
-      </div>
-    </div>`).join('');
-  if (!canEdit) return;
-  el.querySelectorAll('[data-gdel]').forEach(b=>b.onclick=()=>{
-    p.grammars.splice(+b.dataset.gdel,1); save('문법 삭제'); renderSide(); renderMain();
-  });
-  el.querySelectorAll('[data-gedit]').forEach(b=>b.onclick=()=>{
-    const i = +b.dataset.gedit, g = p.grammars[i];
-    editGramIdx = i;
-    $('gTitle').value=g.title||''; $('gNote').value=g.note||''; $('gEx').value=g.example||'';
-    $('gSave').textContent='수정 저장';
-    $('gramForm').classList.add('open');
-    $('gramForm').scrollIntoView({behavior:'smooth',block:'center'});
-  });
-}
-
-/* 예전 형식({meaning, example})도 그대로 읽히도록 맞춰 줍니다 */
-function senses(w){
-  if (Array.isArray(w.senses) && w.senses.length) return w.senses;
-  return [{meaning:w.meaning||'', example:w.example||''}];
-}
-
+/* ================= 뜻 입력 ================= */
 function drawSenseRows(list, used){
-  const box = $('senseRows');
+  const box=$('senseRows');
   box.innerHTML = list.map((s,i)=>`
     <div class="sense-row">
-      <label class="pick" title="지문에서 쓰인 뜻">
-        <input type="radio" name="usedSense" value="${i}"${used===i?' checked':''}>
-      </label>
+      <label class="pick" title="지문에서 쓰인 뜻"><input type="radio" name="usedSense" value="${i}"${used===i?' checked':''}></label>
       <input class="in s-m" placeholder="뜻" value="${esc(s.meaning||'')}">
       <input class="in s-ex" placeholder="예문" value="${esc(s.example||'')}">
       <button class="ico del s-del" title="이 뜻 지우기">✕</button>
     </div>`).join('');
   box.querySelectorAll('.s-del').forEach((b,i)=>b.onclick=()=>{
-    const cur = collectSenses();
-    if (cur.list.length <= 1) { drawSenseRows([{meaning:'',example:''}], 0); return; }
+    const cur=collectSenses();
+    if (cur.list.length<=1){ drawSenseRows([{meaning:'',example:''}],0); return; }
     cur.list.splice(i,1);
-    drawSenseRows(cur.list, Math.min(cur.used, cur.list.length-1));
+    drawSenseRows(cur.list, Math.min(cur.used,cur.list.length-1));
   });
 }
 function collectSenses(){
-  const rows = [...$('senseRows').querySelectorAll('.sense-row')];
-  const list = rows.map(r=>({
-    meaning: r.querySelector('.s-m').value.trim(),
-    example: r.querySelector('.s-ex').value.trim()
-  }));
-  let used = rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
-  if (used < 0) used = 0;
-  return {list, used};
+  const rows=[...$('senseRows').querySelectorAll('.sense-row')];
+  const list=rows.map(r=>({meaning:r.querySelector('.s-m').value.trim(), example:r.querySelector('.s-ex').value.trim()}));
+  let used=rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
+  if (used<0) used=0;
+  return {list,used};
 }
-
 function resetWordForm(){
-  $('wTerm').value=''; $('wPos').value='n.';
-  drawSenseRows([{meaning:'',example:''}], 0);
+  $('wTerm').value=''; $('wPos').value='n.'; $('wSyn').value=''; $('wAnt').value='';
+  drawSenseRows([{meaning:'',example:''}],0);
   $('wSave').textContent='추가';
 }
-function resetGramForm(){ $('gTitle').value=''; $('gNote').value=''; $('gEx').value=''; $('gSave').textContent='추가'; }
-
 function saveWord(){
-  const p = DB.passages.find(x=>x.id===currentId);
-  const term = $('wTerm').value.trim();
+  const p=DB.passages.find(x=>x.id===currentId);
+  const term=$('wTerm').value.trim();
   if (!term){ toast('단어를 입력하세요'); $('wTerm').focus(); return; }
-  const c = collectSenses();
-  const list = c.list.filter(s=>s.meaning || s.example);
+  const c=collectSenses();
+  const list=c.list.filter(s=>s.meaning||s.example);
   if (!list.length){ toast('뜻을 하나 이상 입력하세요'); return; }
-  const item = {term, pos:$('wPos').value, senses:list, used:Math.min(c.used, list.length-1)};
-  p.words = p.words||[];
+  const item={term, pos:$('wPos').value, senses:list, used:Math.min(c.used,list.length-1),
+              syn:$('wSyn').value.trim(), ant:$('wAnt').value.trim()};
+  p.words=p.words||[];
   if (editWordIdx!==null) p.words[editWordIdx]=item; else p.words.push(item);
-  editWordIdx = null;
+  editWordIdx=null;
   save('단어 추가: '+term); renderSide(); renderMain();
 }
-function saveGram(){
-  const p = DB.passages.find(x=>x.id===currentId);
-  const title = $('gTitle').value.trim();
-  if (!title){ toast('문법 포인트를 입력하세요'); $('gTitle').focus(); return; }
-  const item = {title, note:$('gNote').value.trim(), example:$('gEx').value.trim()};
-  p.grammars = p.grammars||[];
-  if (editGramIdx!==null) p.grammars[editGramIdx]=item; else p.grammars.push(item);
-  editGramIdx = null;
-  save('문법 추가'); renderSide(); renderMain();
+
+/* ================= 선지 입력 ================= */
+function drawChoiceRows(list, ans){
+  const box=$('choiceRows');
+  box.innerHTML = list.map((c,i)=>`
+    <div class="ch-row">
+      <label class="pick" title="정답"><input type="radio" name="ansChoice" value="${i}"${ans===i?' checked':''}></label>
+      <span class="cn mono" style="font-family:'IBM Plex Mono',monospace;color:var(--ink-faint);">${CIRC[i]||(i+1)}</span>
+      <input class="in c-t" placeholder="선지" value="${esc(c.text||'')}">
+      <input class="in c-tr" placeholder="선지 해석" value="${esc(c.trans||'')}">
+      <button class="ico del c-del" title="이 선지 지우기">✕</button>
+    </div>`).join('');
+  box.querySelectorAll('.c-del').forEach((b,i)=>b.onclick=()=>{
+    const cur=collectChoices();
+    cur.list.splice(i,1);
+    drawChoiceRows(cur.list, Math.min(cur.ans, Math.max(cur.list.length-1,0)));
+  });
+}
+function collectChoices(){
+  const rows=[...$('choiceRows').querySelectorAll('.ch-row')];
+  const list=rows.map(r=>({text:r.querySelector('.c-t').value.trim(), trans:r.querySelector('.c-tr').value.trim()}));
+  let ans=rows.findIndex(r=>r.querySelector('input[type=radio]').checked);
+  return {list, ans};
 }
 
 /* ================= 지문 모달 ================= */
 function openModal(id){
-  editingPassageId = id||null;
-  const p = id ? DB.passages.find(x=>x.id===id) : null;
-  $('modalTitle').textContent = p ? '지문 수정' : '지문 추가';
-  $('fTitle').value = p?p.title:''; $('fSource').value = p?(p.source||''):'';
-  $('fTags').value = p?(p.tags||[]).join(', '):''; $('fBody').value = p?p.body:'';
-  $('fTrans').value = p?(p.trans||''):'';
+  editingPassageId=id||null;
+  const p = id?DB.passages.find(x=>x.id===id):null;
+  $('modalTitle').textContent = p?'지문 수정':'지문 추가';
+  $('fTitle').value=p?p.title:''; $('fSource').value=p?(p.source||''):'';
+  $('fTags').value=p?(p.tags||[]).join(', '):''; $('fBody').value=p?p.body:'';
+  $('fTrans').value=p?(p.trans||''):''; $('fQ').value=p?(p.question||''):'';
+  drawChoiceRows(p&&p.choices&&p.choices.length?p.choices:[], p&&Number.isInteger(p.answer)?p.answer:-1);
   $('veil').classList.add('open');
   setTimeout(()=>$('fTitle').focus(),60);
 }
 function closeModal(){ $('veil').classList.remove('open'); editingPassageId=null; }
-$('mCancel').onclick = closeModal;
-$('veil').onclick = e=>{ if (e.target===$('veil')) closeModal(); };
-$('mSave').onclick = ()=>{
-  const title = $('fTitle').value.trim(), body = $('fBody').value.trim();
+$('mCancel').onclick=closeModal;
+$('veil').onclick=e=>{ if (e.target===$('veil')) closeModal(); };
+$('addChoice').onclick=()=>{
+  const c=collectChoices(); c.list.push({text:'',trans:''});
+  drawChoiceRows(c.list,c.ans);
+  const rows=$('choiceRows').querySelectorAll('.c-t'); rows[rows.length-1].focus();
+};
+$('mSave').onclick=()=>{
+  const title=$('fTitle').value.trim(), body=$('fBody').value.trim();
   if (!body){ toast('지문을 입력하세요'); $('fBody').focus(); return; }
-  const tags = $('fTags').value.split(',').map(s=>s.trim()).filter(Boolean);
-  const trans = $('fTrans').value.trim();
+  const tags=$('fTags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  const c=collectChoices();
+  const choices=c.list.filter(x=>x.text||x.trans);
+  const answer = (c.ans>=0 && c.ans<choices.length) ? c.ans : null;
+  const data={title:title||'제목 없음', source:$('fSource').value.trim(), tags, body,
+              trans:$('fTrans').value.trim(), question:$('fQ').value.trim(), choices, answer};
   if (editingPassageId){
-    const p = DB.passages.find(x=>x.id===editingPassageId);
-    Object.assign(p,{title:title||p.title, source:$('fSource').value.trim(), tags, body, trans});
+    Object.assign(DB.passages.find(x=>x.id===editingPassageId), data);
   }else{
-    const p = {id:uid(), title:title||'제목 없음', source:$('fSource').value.trim(), tags, body, trans, words:[], grammars:[], createdAt:Date.now()};
-    DB.passages.unshift(p); currentId = p.id;
+    const p={id:uid(), ...data, words:[], grammars:[], createdAt:Date.now()};
+    DB.passages.unshift(p); currentId=p.id;
   }
   closeModal(); save(title?('지문 저장: '+title):'지문 저장'); renderSide(); renderMain();
 };
 
 /* ================= 편집 권한 ================= */
 function openKey(){
-  $('kOwner').value = CFG.owner; $('kRepo').value = CFG.repo;
-  $('kBranch').value = CFG.branch||'main'; $('kPath').value = CFG.path||'data.json';
-  $('kToken').value = CFG.token;
+  $('kOwner').value=CFG.owner; $('kRepo').value=CFG.repo;
+  $('kBranch').value=CFG.branch||'main'; $('kPath').value=CFG.path||'data.json';
+  $('kToken').value=CFG.token;
   $('keyVeil').classList.add('open');
 }
 function closeKey(){ $('keyVeil').classList.remove('open'); }
-$('keyBtn').onclick = openKey;
-$('kCancel').onclick = closeKey;
-$('keyVeil').onclick = e=>{ if (e.target===$('keyVeil')) closeKey(); };
-$('kForget').onclick = ()=>{
+$('keyBtn').onclick=openKey;
+$('kCancel').onclick=closeKey;
+$('keyVeil').onclick=e=>{ if (e.target===$('keyVeil')) closeKey(); };
+$('kForget').onclick=()=>{
   CFG.token=''; writeCfg(false); canEdit=false;
   document.body.classList.remove('can-edit');
   $('keyBtn').classList.remove('on'); $('keyBtn').textContent='🔒 편집';
   closeKey(); setStatus(''); renderMain(); toast('편집 권한을 껐습니다');
 };
-$('kSave').onclick = async ()=>{
+$('kSave').onclick=async ()=>{
   CFG.owner=$('kOwner').value.trim(); CFG.repo=$('kRepo').value.trim();
   CFG.branch=$('kBranch').value.trim()||'main'; CFG.path=$('kPath').value.trim()||'data.json';
   CFG.token=$('kToken').value.trim();
   if (!CFG.owner||!CFG.repo||!CFG.token){ toast('아이디 · 저장소 · 토큰을 모두 입력하세요'); return; }
   toast('확인 중…');
-  const ok = await verify();
-  if (!ok){ toast('접근할 수 없습니다. 토큰 권한(Contents: Read and write)을 확인하세요'); return; }
+  if (!await verify()){ toast('접근할 수 없습니다. 토큰 권한(Contents: Read and write)을 확인하세요'); return; }
   writeCfg($('kRemember').checked);
-  canEdit = true;
+  canEdit=true;
   document.body.classList.add('can-edit');
   $('keyBtn').classList.add('on'); $('keyBtn').textContent='🔓 편집 중';
   closeKey(); setStatus('연결됨'); renderSide(); renderMain();
 };
 async function verify(){
   try{
-    const r = await fetch(`https://api.github.com/repos/${CFG.owner}/${CFG.repo}`, {headers:ghHeaders()});
+    const r=await fetch(`https://api.github.com/repos/${CFG.owner}/${CFG.repo}`,{headers:ghHeaders()});
     if (!r.ok) return false;
-    const j = await r.json();
-    if (!j.permissions || !j.permissions.push) return false;
-    await fetchSha();
-    return true;
+    const j=await r.json();
+    if (!j.permissions||!j.permissions.push) return false;
+    await fetchSha(); return true;
   }catch(e){ return false; }
 }
 
-/* ================= 내보내기 ================= */
-$('exportBtn').onclick = ()=>{
-  const blob = new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'data.json';
-  a.click(); URL.revokeObjectURL(a.href);
+/* ================= 기타 ================= */
+$('exportBtn').onclick=()=>{
+  const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='data.json'; a.click(); URL.revokeObjectURL(a.href);
   toast('data.json 을 내려받았습니다');
 };
-
-/* ================= 기타 ================= */
-$('newBtn').onclick = ()=>openModal(null);
-$('search').oninput = e=>{ query=e.target.value; renderList(); };
-$('toggleSide').onclick = ()=>{
-  const s = $('side'); s.classList.toggle('collapsed');
+$('newBtn').onclick=()=>openModal(null);
+$('search').oninput=e=>{ query=e.target.value; renderList(); };
+$('toggleSide').onclick=()=>{
+  const s=$('side'); s.classList.toggle('collapsed');
   $('toggleSide').textContent = s.classList.contains('collapsed')?'목록 펼치기':'목록 접기';
 };
-document.addEventListener('keydown', e=>{ if (e.key==='Escape'){ closeModal(); closeKey(); } });
+document.addEventListener('keydown',e=>{ if (e.key==='Escape'){ closeModal(); closeKey(); } });
 
 /* ================= 시작 ================= */
 (async function init(){
   readCfg();
   await loadData();
-  if (CFG.token && CFG.owner && CFG.repo){
+  if (CFG.token&&CFG.owner&&CFG.repo){
     canEdit = await verify();
     if (canEdit){
       document.body.classList.add('can-edit');
       $('keyBtn').classList.add('on'); $('keyBtn').textContent='🔓 편집 중';
     }
   }
-  if (!DB.passages.length && canEdit) toast('첫 지문을 추가해 보세요');
-  currentId = DB.passages[0] ? DB.passages[0].id : null;
+  currentId = DB.passages[0]?DB.passages[0].id:null;
   setStatus('연결됨');
   renderSide(); renderMain();
 })();
