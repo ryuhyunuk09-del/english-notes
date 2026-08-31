@@ -124,6 +124,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "legendary",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "명성이 자자한",
+              "example": ""
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
