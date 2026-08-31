@@ -85,6 +85,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "microclimate",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "미기후",
+              "example": ""
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
