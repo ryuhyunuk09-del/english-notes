@@ -176,6 +176,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "approximately",
+          "pos": "adv.",
+          "senses": [
+            {
+              "meaning": "거의, 대략적으로",
+              "example": "The journey took approximately seven hours.   그 여정은 7시간 가까이 걸렸다"
+            }
+          ],
+          "used": 0,
+          "syn": "about, around",
+          "ant": ""
         }
       ],
       "grammars": [],
