@@ -111,6 +111,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "be reagard as",
+          "pos": "phr.",
+          "senses": [
+            {
+              "meaning": "~로 여겨지다",
+              "example": "Some people regard grammar as an immutable set of rules that must be obeyed. 어떤 사람들은 문법을 반드시 지켜야 할 불변의 규칙으로 여긴다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
