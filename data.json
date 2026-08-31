@@ -137,6 +137,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "scant",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "부족한, 거의 없는",
+              "example": "Add a scant cup of sugar to the mixture. 혼합물에 한 컵이 조금 안 되는 양의 설탕을 넣으세요."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
