@@ -189,6 +189,19 @@
           "used": 0,
           "syn": "about, around",
           "ant": ""
+        },
+        {
+          "term": "in spite of",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "~에도 불구하고",
+              "example": "In spite of his age, he still leads an active life.   그는 그 연령에도 아직 활발한 생활을 한다."
+            }
+          ],
+          "used": 0,
+          "syn": "despite",
+          "ant": ""
         }
       ],
       "grammars": [],
