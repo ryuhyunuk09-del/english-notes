@@ -228,6 +228,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "strategic",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "전략적인",
+              "example": "Malta was of vital strategic importance during the war.   그 전쟁 중에는 몰타가 전략적으로 지극히 중요했다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
