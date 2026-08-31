@@ -163,6 +163,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "bank",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "둑으로 둘러싸다, 경사지게 하다",
+              "example": "The engineers banked the river to prevent flooding. 엔지니어들은 홍수를 막기 위해 강에 둑을 쌓았다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
