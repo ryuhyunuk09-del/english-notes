@@ -72,7 +72,21 @@
         }
       ],
       "answer": 4,
-      "words": [],
+      "words": [
+        {
+          "term": "localize",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "(영향 등)을 국한시키다.",
+              "example": "The engineers managed to localize the system failure to a single server. 엔지니어들은 시스템 장애를 단 하나의 서버로 국지화하는 데 성공했다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
+        }
+      ],
       "grammars": [],
       "createdAt": 1787747072904
     },
