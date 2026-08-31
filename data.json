@@ -202,6 +202,19 @@
           "used": 0,
           "syn": "despite",
           "ant": ""
+        },
+        {
+          "term": "severe",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "가혹한, 심각한",
+              "example": "His injuries are severe.   그의 부상은 심각하다."
+            }
+          ],
+          "used": 0,
+          "syn": "harsh",
+          "ant": ""
         }
       ],
       "grammars": [],
