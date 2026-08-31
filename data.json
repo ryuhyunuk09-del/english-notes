@@ -150,6 +150,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "lettuce",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "상추",
+              "example": "맛있다"
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
