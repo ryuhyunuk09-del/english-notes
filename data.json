@@ -98,6 +98,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "the bed",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "화단",
+              "example": "She spent the afternoon planting tulips in the flower bed. 그녀는 오후 내내 화단에 튤립을 심으며 보냈다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
