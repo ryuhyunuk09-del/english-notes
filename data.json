@@ -190,6 +190,20 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "interdependence",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "상호 의존",
+              "example": "The global economy is characterized by a high degree of interdependence. 세계 경제는 높은 수준의 상호의존성이 특징이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": "",
+          "forms": ""
         }
       ],
       "grammars": [],
