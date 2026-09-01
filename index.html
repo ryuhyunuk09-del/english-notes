@@ -379,27 +379,106 @@ function setStatus(s){
     : '읽기 모드 · 편집하려면 🔒 를 누르세요';
 }
 
-/* ================= 지문 본문 ================= */
-function renderPassageBody(p){
-  const terms = (p.words||[]).map((w,i)=>({t:(w.term||'').trim(), i}))
-    .filter(o=>o.t.length>0).sort((a,b)=>b.t.length-a.t.length);
-  if (!terms.length) return esc(p.body);
-  const parts = terms.map(o=>{
-    const base = rxEsc(o.t);
-    return /\s/.test(o.t) ? base : base+'(?:s|es|ed|ing|d|ies|ly)?';
-  });
-  const re = new RegExp('(?<![\\w-])('+parts.join('|')+')(?![\\w-])','gi');
+/* ================= 단어 매칭 ================= */
+/* 불규칙 변화형 — 양방향으로 이어 줍니다 */
+const IRREG_SRC = {
+  phenomenon:'phenomena', criterion:'criteria', datum:'data', medium:'media',
+  bacterium:'bacteria', curriculum:'curricula', stimulus:'stimuli', nucleus:'nuclei',
+  fungus:'fungi', radius:'radii', alumnus:'alumni', formula:'formulae',
+  analysis:'analyses', basis:'bases', crisis:'crises', hypothesis:'hypotheses',
+  thesis:'theses', diagnosis:'diagnoses', emphasis:'emphases', axis:'axes',
+  index:'indices', matrix:'matrices', appendix:'appendices', vertex:'vertices',
+  man:'men', woman:'women', child:'children', person:'people', foot:'feet',
+  tooth:'teeth', goose:'geese', mouse:'mice', ox:'oxen',
+  life:'lives', wife:'wives', knife:'knives', leaf:'leaves', half:'halves',
+  shelf:'shelves', wolf:'wolves', thief:'thieves', self:'selves',
+  be:'am is are was were been being', have:'has had having', do:'does did done doing',
+  go:'went gone going', take:'took taken taking', give:'gave given giving',
+  make:'made making', see:'saw seen seeing', know:'knew known knowing',
+  think:'thought thinking', bring:'brought bringing', buy:'bought buying',
+  catch:'caught catching', teach:'taught teaching', find:'found finding',
+  hold:'held holding', keep:'kept keeping', leave:'left leaving',
+  lose:'lost losing', mean:'meant meaning', meet:'met meeting', pay:'paid paying',
+  say:'said saying', sell:'sold selling', send:'sent sending', sit:'sat sitting',
+  speak:'spoke spoken speaking', stand:'stood standing', tell:'told telling',
+  understand:'understood understanding', write:'wrote written writing',
+  grow:'grew grown growing', draw:'drew drawn drawing', drive:'drove driven driving',
+  eat:'ate eaten eating', fall:'fell fallen falling', feel:'felt feeling',
+  get:'got gotten getting', hear:'heard hearing', run:'ran running',
+  rise:'rose risen rising', choose:'chose chosen choosing',
+  break:'broke broken breaking', become:'became becoming',
+  begin:'began begun beginning', build:'built building', spend:'spent spending',
+  win:'won winning', wear:'wore worn wearing', throw:'threw thrown throwing',
+  seek:'sought seeking', deal:'dealt dealing', lead:'led leading',
+  read:'reading', set:'setting', put:'putting', cut:'cutting',
+  cost:'costing', let:'letting', hit:'hitting', hurt:'hurting', spread:'spreading'
+};
+const IRREG = (()=>{
+  const m={};
+  const add=(k,v)=>{ (m[k]=m[k]||new Set()).add(v); };
+  for (const base in IRREG_SRC){
+    IRREG_SRC[base].split(' ').forEach(f=>{ add(base,f); add(f,base);
+      IRREG_SRC[base].split(' ').forEach(g=>{ if(g!==f) add(f,g); }); });
+  }
+  return m;
+})();
+
+/* 한 단어가 가질 수 있는 형태들 */
+function wordForms(word){
+  const t = word.toLowerCase().replace(/[^a-z'’-]/g,'');
+  if (!t) return [];
+  const s = new Set([t]);
+  (IRREG[t]||[]).forEach(x=>s.add(x));
+  const last=t.slice(-1), prev=t.slice(-2,-1);
+  s.add(t+'s'); s.add(t+'ly');
+  if (/[sxz]$|ch$|sh$/.test(t)) s.add(t+'es');
+  if (last==='e'){ const st=t.slice(0,-1); s.add(st+'ing'); s.add(t+'d'); s.add(st+'ed'); }
+  else { s.add(t+'ed'); s.add(t+'ing'); }
+  if (last==='y' && !/[aeiou]/.test(prev)){
+    const st=t.slice(0,-1); s.add(st+'ies'); s.add(st+'ied'); s.add(st+'ily');
+  }
+  if (/[^aeiou][aeiou][bdgklmnprt]$/.test(t)){ s.add(t+last+'ed'); s.add(t+last+'ing'); }
+  s.add(t+'er'); s.add(t+'est');
+  return [...s];
+}
+
+/* 하나의 표제어(단어 또는 숙어)에 대한 정규식 조각.
+   숙어는 사이에 다른 단어가 최대 3개까지 끼어들어도 잡습니다. */
+function termPattern(term, extra){
+  const manual = String(extra||'').split(/[,\s]+/).filter(Boolean);
+  const words = term.trim().split(/\s+/).filter(Boolean);
+  const alt = arr => arr.map(rxEsc).sort((a,b)=>b.length-a.length).join('|');
+
+  const core = words.map(w=>'(?:'+alt(wordForms(w))+')')
+                    .join("(?:\\s+[\\w'’-]+){0,3}\\s+");
+  const parts = [core];
+  manual.forEach(f=>parts.push(rxEsc(f.toLowerCase())));
+  return '(?:'+parts.join('|')+')';
+}
+
+/* 텍스트에 형광펜을 입힙니다. 지문과 선지 모두 이걸 씁니다. */
+function highlight(text, words){
+  const items = (words||[]).map((w,i)=>({i, term:(w.term||'').trim(), forms:w.forms||''}))
+    .filter(o=>o.term)
+    .sort((a,b)=>b.term.length-a.term.length);
+  if (!items.length || !text) return esc(text||'');
+
+  let re;
+  try{
+    re = new RegExp("(?<![\\w-])(" + items.map(o=>termPattern(o.term,o.forms)).join(')|(') + ")(?![\\w-])",'gi');
+  }catch(e){ return esc(text); }
+
   let out='', last=0, m;
-  while ((m=re.exec(p.body))!==null){
-    const hit=m[0].toLowerCase();
-    let idx=terms.findIndex(o=>hit===o.t.toLowerCase());
-    if (idx===-1) idx=terms.findIndex(o=>hit.startsWith(o.t.toLowerCase()));
-    out += esc(p.body.slice(last,m.index));
-    out += '<mark class="hl" data-w="'+terms[Math.max(idx,0)].i+'">'+esc(m[0])+'</mark>';
+  while ((m=re.exec(text))!==null){
+    if (m[0]===''){ re.lastIndex++; continue; }
+    let gi=0;
+    for (let k=1;k<m.length;k++) if (m[k]!==undefined){ gi=k-1; break; }
+    out += esc(text.slice(last,m.index));
+    out += '<mark class="hl" data-w="'+items[gi].i+'">'+esc(m[0])+'</mark>';
     last = m.index+m[0].length;
     if (m.index===re.lastIndex) re.lastIndex++;
   }
-  out += esc(p.body.slice(last));
+  out += esc(text.slice(last));
   return out;
 }
 
@@ -481,7 +560,7 @@ function renderMain(){
       </div>
     </div>
 
-    <div class="paper" id="paper">${renderPassageBody(p)}${
+    <div class="paper" id="paper">${highlight(p.body, p.words)}${
       p.trans?`<div class="trans-block" id="transBlock"${showTrans?'':' style="display:none;"'}><span class="lead">해석</span>${esc(p.trans)}</div>`:''
     }</div>
 
@@ -499,7 +578,7 @@ function renderMain(){
           const on = showAns && p.answer===i;
           return `<div class="choice${on?' ans':''}">
             <span class="cn">${CIRC[i]||(i+1)}</span>
-            <div class="ctext">${esc(c.text||'')}${on?'<span class="ans-tag">정답</span>':''}
+            <div class="ctext">${highlight(c.text||'', p.words)}${on?'<span class="ans-tag">정답</span>':''}
               ${c.trans?`<div class="ctr"${showCTrans?'':' style="display:none;"'}>${esc(c.trans)}</div>`:''}
             </div>
           </div>`;
@@ -533,6 +612,10 @@ function renderMain(){
         <div class="grid g2" style="margin-top:12px;">
           <div class="fld"><label>유의어 (쉼표로 구분)</label><input class="in" id="wSyn" placeholder="notice, perceive"></div>
           <div class="fld"><label>반의어 (쉼표로 구분)</label><input class="in" id="wAnt" placeholder="ignore, overlook"></div>
+        </div>
+        <div class="fld" style="margin-top:12px;">
+          <label>다른 형태 &nbsp;— &nbsp;자동으로 안 잡히는 변화형이 있으면 적으세요</label>
+          <input class="in" id="wForms" placeholder="예) phenomena, phenomenal">
         </div>
         <div class="form-foot">
           <button class="btn btn-sm" id="wCancel">취소</button>
@@ -572,7 +655,7 @@ function renderMain(){
     $('wSave').onclick=saveWord;
   }
 
-  $('paper').querySelectorAll('mark.hl').forEach(mk=>mk.onclick=()=>{
+  m.querySelectorAll('mark.hl').forEach(mk=>mk.onclick=()=>{
     const row=document.querySelector(`[data-word-row="${mk.dataset.w}"]`);
     if (!row) return;
     row.scrollIntoView({behavior:'smooth',block:'center'});
@@ -623,7 +706,7 @@ function renderWords(){
     const i=+b.dataset.wedit, w=p.words[i];
     editWordIdx=i;
     $('wTerm').value=w.term||''; $('wPos').value=w.pos||'';
-    $('wSyn').value=w.syn||''; $('wAnt').value=w.ant||'';
+    $('wSyn').value=w.syn||''; $('wAnt').value=w.ant||''; $('wForms').value=w.forms||'';
     drawSenseRows(senses(w), w.used|0);
     $('wSave').textContent='수정 저장';
     $('wordForm').classList.add('open');
@@ -656,7 +739,7 @@ function collectSenses(){
   return {list,used};
 }
 function resetWordForm(){
-  $('wTerm').value=''; $('wPos').value='n.'; $('wSyn').value=''; $('wAnt').value='';
+  $('wTerm').value=''; $('wPos').value='n.'; $('wSyn').value=''; $('wAnt').value=''; $('wForms').value='';
   drawSenseRows([{meaning:'',example:''}],0);
   $('wSave').textContent='추가';
 }
@@ -668,7 +751,7 @@ function saveWord(){
   const list=c.list.filter(s=>s.meaning||s.example);
   if (!list.length){ toast('뜻을 하나 이상 입력하세요'); return; }
   const item={term, pos:$('wPos').value, senses:list, used:Math.min(c.used,list.length-1),
-              syn:$('wSyn').value.trim(), ant:$('wAnt').value.trim()};
+              syn:$('wSyn').value.trim(), ant:$('wAnt').value.trim(), forms:$('wForms').value.trim()};
   p.words=p.words||[];
   if (editWordIdx!==null) p.words[editWordIdx]=item; else p.words.push(item);
   editWordIdx=null;
