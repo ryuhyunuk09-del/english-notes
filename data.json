@@ -86,6 +86,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "pass on(to)",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "~에게 넘겨주다(수평적 일반적 전달)",
+              "example": "The leadership of the company will pass to the founder's daughter.회사의 경영권은 창립자의 딸에게 넘어갈 것이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
