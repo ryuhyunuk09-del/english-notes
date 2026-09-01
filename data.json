@@ -112,6 +112,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "accumulate",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "(서서히) 모으다, 축적하다",
+              "example": "I seem to have accumulated a lot of books.   내가 책을 많이 모은 것 같다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
