@@ -125,6 +125,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "eon",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "억겁",
+              "example": "The earth was formed eons ago. 지구는 수억 년 전[영겁의 세월 전]에 형성되었다"
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
