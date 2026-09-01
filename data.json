@@ -204,6 +204,20 @@
           "syn": "",
           "ant": "",
           "forms": ""
+        },
+        {
+          "term": "trait",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "특성",
+              "example": "Honesty is a highly valued personality trait. 정직은 매우 가치 있게 여겨지는 성격적 특성이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": "",
+          "forms": ""
         }
       ],
       "grammars": [],
