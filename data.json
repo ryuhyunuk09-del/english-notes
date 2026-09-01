@@ -60,6 +60,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "strand",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "가닥, 울",
+              "example": "a strand of wool   털실 한 가닥"
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
