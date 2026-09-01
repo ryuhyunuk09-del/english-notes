@@ -151,6 +151,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "phenomenon",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "현상",
+              "example": "El Niño is a natural phenomenon that affects global weather.엘니뇨는 세계 기후에 영향을 미치는 자연 현상이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
