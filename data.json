@@ -34,7 +34,21 @@
         }
       ],
       "answer": 3,
-      "words": [],
+      "words": [
+        {
+          "term": "race",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "인종",
+              "example": "People from different races work together in this company. 이 회사에서는 다양한 인종의 사람들이 함께 일합니다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
+        }
+      ],
       "grammars": [],
       "createdAt": 1787747341706
     },
