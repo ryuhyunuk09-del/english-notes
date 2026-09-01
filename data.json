@@ -99,6 +99,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "manifestation",
+          "pos": "v.",
+          "senses": [
+            {
+              "meaning": "구현",
+              "example": "The architecture of the building is a physical manifestation of modernism. 그 건물의 건축 양식은 모더니즘의 물리적인 구현체이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
