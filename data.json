@@ -241,6 +241,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "parallel",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "위도선",
+              "example": ""
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
