@@ -164,6 +164,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "blueprint",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "청사진, 설계도",
+              "example": "DNA is the genetic blueprint of life. DNA는 생명체의 유전적 설계도이다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
