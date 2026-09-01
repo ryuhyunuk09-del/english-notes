@@ -177,6 +177,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "constraint",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "제약, 제한",
+              "example": "We must complete the project within the given time constraints.우리는 주어진 시간적 제약 내에 프로젝트를 완료해야 한다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
