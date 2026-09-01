@@ -47,6 +47,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "staetment",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "(공식적인 입장이나 의견을 밝힌)말, 진술",
+              "example": "The police asked me to make a statement.   경찰이 나에게 진술서를 작성하게 했다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
