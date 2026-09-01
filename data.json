@@ -138,6 +138,19 @@
           "used": 0,
           "syn": "",
           "ant": ""
+        },
+        {
+          "term": "pitiless",
+          "pos": "adj.",
+          "senses": [
+            {
+              "meaning": "인정사정없는, 냉혹한",
+              "example": "The dictator was known for his pitiless rule. 그 독재자는 냉혹한 통치로 유명했다."
+            }
+          ],
+          "used": 0,
+          "syn": "",
+          "ant": ""
         }
       ],
       "grammars": [],
