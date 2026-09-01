@@ -218,6 +218,20 @@
           "syn": "",
           "ant": "",
           "forms": ""
+        },
+        {
+          "term": "descendant",
+          "pos": "n.",
+          "senses": [
+            {
+              "meaning": "후손",
+              "example": "He claims to be a direct descendant of the king. 그는 자신이 왕의 직계 후손이라고 주장한다."
+            }
+          ],
+          "used": 0,
+          "syn": "offspring",
+          "ant": "",
+          "forms": ""
         }
       ],
       "grammars": [],
